@@ -5,4 +5,5 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="colorGray">#999</color>
     <color name="colorOrange">#FFCC00</color>
+    <color name="un_Accent">#FFCC00 </color>
 </resources>

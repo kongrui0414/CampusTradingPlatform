@@ -1,41 +1,53 @@
 package com.example.campustradingplatform;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.campustradingplatform.Msg.MsgAdapter;
 import com.example.campustradingplatform.Msg.MsgItem;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MsgListActivity extends AppCompatActivity {
+/**
+ * Created by 武当山道士 on 2017/8/16.
+ */
+
+public class MsgListFragment extends Fragment {
 
     private String[] mStrs = {"aaa", "bbb", "ccc", "airsaid"};
     private SearchView mSearchView;
     private ListView mListView;
     private MsgAdapter msgAdapter;
     List<MsgItem> msgItems=new ArrayList<>();
+    View view;
 
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_msg_list);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.msglist_fragment, container, false);
+        this.view = view;
+        init();
+        return view;
+    }
 
+
+    public void init(){
         //搜索框
-        mSearchView = (SearchView) findViewById(R.id.searchView);
-        mListView = (ListView) findViewById(R.id.listView);
-        mListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mStrs));
+        mSearchView = (SearchView) view.findViewById(R.id.searchView);
+        mListView = (ListView) view.findViewById(R.id.listView);
+        mListView.setAdapter(new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, mStrs));
         mListView.setTextFilterEnabled(true);
 
         // 设置搜索文本监听
@@ -60,10 +72,9 @@ public class MsgListActivity extends AppCompatActivity {
 
         //消息列表
         initMsgs();
-        ListView msgsView=(ListView)findViewById(R.id.msgs_view);
-        msgAdapter=new MsgAdapter(MsgListActivity.this,R.layout.msg_item,msgItems);
+        ListView msgsView=(ListView)view.findViewById(R.id.msgs_view);
+        msgAdapter=new MsgAdapter(view.getContext(),R.layout.msg_item,msgItems);
         msgsView.setAdapter(msgAdapter);
-
     }
 
     private void initMsgs() {
@@ -74,5 +85,5 @@ public class MsgListActivity extends AppCompatActivity {
             msgItems.add(msgItem);
         }
     }
-
 }
+
