@@ -1,12 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:leon="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="fill_parent"
+    android:layout_width="match_parent">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="center"
-        />
+        android:orientation="vertical"
+        tools:context=".MainActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginBottom="16dp"
+            android:background="#fff"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@drawable/touxiang"
+                leon:civ_border_color="#FFFFFF"
+                leon:civ_border_width="2dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="我的名字是库里"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:background="#ffcc00"
+                android:text="个人主页"
+                />
+        </LinearLayout>
+
+
+        <com.leon.lib.settingview.LSettingItem
+            android:id="@+id/item_shoucang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            leon:leftIcon="@drawable/shoucang"
+            leon:leftText="我的收藏" />
+
+        <com.leon.lib.settingview.LSettingItem
+            android:id="@+id/item_guanzhu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            leon:leftIcon="@drawable/guanzhu"
+            leon:leftText="我的关注" />
+
+        <com.leon.lib.settingview.LSettingItem
+            android:id="@+id/item_liulan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            leon:leftIcon="@drawable/liulan"
+            leon:leftText="历史浏览" />
+
+        <com.leon.lib.settingview.LSettingItem
+            android:id="@+id/item_dingdan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            leon:leftIcon="@drawable/dingdan"
+            leon:leftText="我的订单"
+            />
+
+        <com.leon.lib.settingview.LSettingItem
+            android:id="@+id/item_zaishou"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/MyCheckBox"
+            leon:leftIcon="@drawable/zaishou"
+            leon:leftText="在售" />
+
+        <com.leon.lib.settingview.LSettingItem
+            android:id="@+id/item_daifu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            leon:leftIcon="@drawable/daifu"
+            leon:leftText="待付款" />
+
+        <com.leon.lib.settingview.LSettingItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            leon:isShowUnderLine="false"
+            leon:leftIcon="@drawable/location"
+            leon:leftText="我的位置"
+            leon:rightStyle="iconSwitch" />
+
+        <com.leon.lib.settingview.LSettingItem
+            android:id="@+id/item_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            leon:leftIcon="@drawable/setting"
+            leon:leftText="设置" />
+
+        <!--    <com.leon.lib.settingview.LSettingItem-->
+        <!--        android:id="@+id/item_six"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:theme="@style/MyCheckBox"-->
+        <!--        leon:leftIcon="@drawable/shoucang"-->
+        <!--        leon:rightStyle="iconSwitch"-->
+        <!--        leon:leftText="设置" />-->
+    </LinearLayout>
+</ScrollView>
+
+
