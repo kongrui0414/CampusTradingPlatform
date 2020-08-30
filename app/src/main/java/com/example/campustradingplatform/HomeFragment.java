@@ -31,11 +31,8 @@ import java.util.*;
 
 public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
-    ClassifyAdapter Adapter_ColumnLayout;
 
     String[] ITEM_NAMES = {"天猫", "聚划算", "天猫国际", "外卖"};
-
-    private ArrayList<HashMap<String,Object>> list;
 
     @Nullable
     @Override
@@ -107,12 +104,12 @@ public class HomeFragment extends Fragment {
             }
         };
         /**
-         *Success
+         *Success--Classify
          */
         GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(4);
-        gridLayoutHelper.setPadding(0, 20, 0, 0);
+        gridLayoutHelper.setPadding(30, 20, 30, 0);
         gridLayoutHelper.setVGap(20);//垂直间距
-        gridLayoutHelper.setHGap(0);//水平间距
+        gridLayoutHelper.setHGap(20);//水平间距
         BaseAdapter menuAdapter = new BaseAdapter(gridLayoutHelper, R.layout.classify_item, Arrays.asList(ITEM_NAMES)){
             @Override
             public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
@@ -146,90 +143,39 @@ public class HomeFragment extends Fragment {
 
 
         /**
-         *
+         *Goods-list
          */
+        final List<String> gridlist = new ArrayList();
+        for (int i=0;i<20;i++){
+            gridlist.add("第"+i+"项");
+        }
         GridLayoutHelper gridLayoutHelper_list = new GridLayoutHelper(2);
-        gridLayoutHelper.setPadding(0, 20, 0, 0);
-        gridLayoutHelper.setVGap(20);//垂直间距
-        gridLayoutHelper.setHGap(0);//水平间距
-        BaseDelegeteAdapter listAdapter = new BaseDelegeteAdapter(getActivity(), gridLayoutHelper_list,
-                R.layout.classify_item, 10) {
+        gridLayoutHelper_list.setPadding(30, 20, 30, 0);
+        gridLayoutHelper_list.setVGap(20);//垂直间距
+        gridLayoutHelper_list.setHGap(20);//水平间距
+        BaseAdapter gridAdapter = new BaseAdapter(gridLayoutHelper_list, R.layout.goods_item,gridlist){
             @Override
-            public void onBindViewHolder(@NonNull BaseViewHolder holder, final int position) {
-                holder.setText(R.id.classify_text, ITEM_NAMES[position%4] + "");
-                holder.setImageResource(R.id.classify_image, R.mipmap.ic_launcher);
-                holder.getView(R.id.classify_text).setOnClickListener(new View.OnClickListener() {
+            public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                holder.setText(R.id.goods_describe, gridlist.get(position));
+                holder.setImageResource(R.id.goods_image, R.drawable.head);
+                holder.getView(R.id.goods_item).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(getContext(), ITEM_NAMES[position],
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "点击", Toast.LENGTH_SHORT).show();
                     }
                 });
-                super.onBindViewHolder(holder, position);
             }
         };
 
         DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager, true);
         delegateAdapter.addAdapter(bannerAdapter);
         delegateAdapter.addAdapter(menuAdapter);
-        delegateAdapter.addAdapter(listAdapter);
+        delegateAdapter.addAdapter(gridAdapter);
 
         recyclerView.setAdapter(delegateAdapter);
     }
     }
-//
-//    private void init() {
-//        /**
-//         * recycle 和 VirtualLayoutManager 绑定
-//         */
-//        VirtualLayoutManager layoutManager = new VirtualLayoutManager(getActivity());
-//        recyclerView.setLayoutManager(layoutManager);
-//        /**
-//         * 设置复用回收池
-//         */
-//        RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
-//        recyclerView.setRecycledViewPool(viewPool);
-//        viewPool.setMaxRecycledViews(0, 10);
-//        /**
-//         * 数据填充
-//         */
-//
-//        list = new ArrayList<>();
-//        for (int i = 0;i<4;i++)
-//        {
-//            HashMap<String,Object> map = new HashMap<>();
-//            map.put("text", i+"");
-//            map.put("image", R.mipmap.ic_launcher);
-//            list.add(map);
-//        }
-//        /**
-//         *根据数据列表，创建对应的LayoutHelper
-//         */
-//        ColumnLayoutHelper columnLayoutHelper = new ColumnLayoutHelper();
-//        // 创建对象
-//
-//        // 公共属性
-//        columnLayoutHelper.setItemCount(4);// 设置布局里Item个数
-//        columnLayoutHelper.setPadding(20, 20, 20, 20);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
-//        columnLayoutHelper.setMargin(20, 20, 20, 20);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
-//        columnLayoutHelper.setBgColor(Color.GRAY);// 设置背景颜色
-//        columnLayoutHelper.setAspectRatio(6);// 设置设置布局内每行布局的宽与高的比
-//
-//        // columnLayoutHelper特有属性
-//        columnLayoutHelper.setWeights(new float[]{25, 25, 25, 25});// 设置该行每个Item占该行总宽度的比例
-//        // 同上面Weigths属性讲解
-//
-//        // 创建自定义的Adapter对象 & 绑定数据 & 绑定对应的LayoutHelper进行布局绘制
-//        Adapter_ColumnLayout  = new ClassifyAdapter(getActivity(), columnLayoutHelper, 4, list);
-////        Adapter_ColumnLayout.setOnItemClickListener(this);
-//        /**
-//         *5.
-//         */
-//        List<DelegateAdapter.Adapter> adapters = new LinkedList<>();
-//        adapters.add(Adapter_ColumnLayout);
-//        DelegateAdapter delegateAdapter = new DelegateAdapter(layoutManager);
-//        delegateAdapter.setAdapters(adapters);
-//        recyclerView.setAdapter(delegateAdapter);
-//    }
+
 
 
