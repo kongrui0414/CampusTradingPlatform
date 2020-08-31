@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.circularreveal.CircularRevealRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="注册"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="35dp" />
+
+    <TextView
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="手机号码:"
+        android:textColor="#000"
+        android:textSize="22dp" />
+
+    <TextView
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="    验证码:"
+        android:textColor="#000"
+        android:textSize="22dp" />
+
+    <TextView
+        android:layout_marginTop="270dp"
+        android:layout_marginLeft="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="        密码:"
+        android:textColor="#000"
+        android:textSize="22dp" />
+
+    <TextView
+        android:layout_marginTop="340dp"
+        android:layout_marginLeft="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="确认密码:"
+        android:textColor="#000"
+        android:textSize="22dp" />
+
+    <EditText
+        android:id="@+id/register_phoneNum"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="145dp"
+        android:layout_weight="2"
+        android:hint="请输入手机号码"
+        android:inputType="number"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/register_captcha"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="215dp"
+        android:layout_weight="2"
+        android:hint="请输入验证码"
+        android:inputType="number"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/register_password"
+        android:inputType="textPassword"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="285dp"
+        android:layout_weight="2"
+        android:hint="请输入密码"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/register_samePassword"
+        android:inputType="textPassword"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="355dp"
+        android:layout_weight="2"
+        android:hint="请再输入一次密码"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/register_sendCaptcha"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="215dp"
+        android:background="@drawable/button_circle_shape"
+        android:text="发送验证码"
+        android:textSize="15dp" />
+
+    <Button
+        android:id="@+id/register_registerFinish"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="450dp"
+        android:text="注册"
+        android:textSize="20dp"
+        android:background="@drawable/button_circle_shape"
+        />
+
+
+
+</com.google.android.material.circularreveal.CircularRevealRelativeLayout>

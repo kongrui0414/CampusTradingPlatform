@@ -9,15 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MsgListActivity">
-        </activity>
-        <activity android:name=".MyCenterActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".Login.PhoneNumLogin"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".Login.Register2"
+            android:launchMode="singleTask"/>
+        <activity android:name=".Login.Register1"
+            android:launchMode="singleTask"/>
+        <activity android:name=".Login.Login"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MsgListActivity" />
+        <activity android:name=".MyCenterActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
