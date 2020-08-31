@@ -15,13 +15,11 @@ public class MyCenterActivity extends AppCompatActivity {
         setContentView(R.layout.my_center_fragment);
 
         //对一个控件进行点击事件
-        LSettingItem one =(LSettingItem)findViewById(R.id.item_guanzhu);
-
-
-        one.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
+        LSettingItem dingdan =(LSettingItem)findViewById(R.id.item_dingdan);
+        dingdan.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
             @Override
             public void click() {
-                Toast.makeText(MyCenterActivity.this,"点击了钱包",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyCenterActivity.this,"暂时没有订单",Toast.LENGTH_SHORT).show();
             }
         });
 
