@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.campustradingplatform">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PublishOk"></activity>
+        <activity android:name=".DividedActivity"></activity>
+        <activity android:name=".PublishOk" />
         <activity
             android:name=".Login.PhoneNumLogin"
             android:launchMode="singleTask" />
@@ -33,9 +37,10 @@
         <activity android:name=".MsgListActivity" />
         <activity android:name=".MyCenterActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".PublishActivity"></activity>
-        <activity android:name=".PublishOk"
-            tools:ignore="DuplicateActivity"></activity>
+        <activity android:name=".PublishActivity" />
+        <activity
+            android:name=".PublishOk"
+            tools:ignore="DuplicateActivity" />
     </application>
 
 </manifest>
