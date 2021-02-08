@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DividedActivity"></activity>
+        <activity android:name=".Msg.MsgDetailActivity"></activity>
+        <activity android:name=".DividedActivity" />
         <activity android:name=".PublishOk" />
         <activity
             android:name=".Login.PhoneNumLogin"
@@ -34,7 +35,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MsgListActivity" />
         <activity android:name=".MyCenterActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".PublishActivity" />

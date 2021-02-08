@@ -1,10 +1,12 @@
 package com.example.campustradingplatform;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -14,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.campustradingplatform.Msg.MsgAdapter;
+import com.example.campustradingplatform.Msg.MsgDetailActivity;
 import com.example.campustradingplatform.Msg.MsgItem;
 
 import java.util.ArrayList;
@@ -75,6 +78,18 @@ public class MsgListFragment extends Fragment {
         ListView msgsView=(ListView)view.findViewById(R.id.msgs_view);
         msgAdapter=new MsgAdapter(view.getContext(),R.layout.msg_item,msgItems);
         msgsView.setAdapter(msgAdapter);
+
+
+
+        msgsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(getActivity(),"第"+position+"个item", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), MsgDetailActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
     }
 
     private void initMsgs() {

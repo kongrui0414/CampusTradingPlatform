@@ -1,35 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="88px"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="#50FFCC00"
-    >
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:textSize="44px"
-        android:text="消息"
-        android:textColor="#000"
-        android:paddingLeft="12px"
-        android:textStyle="bold"
-        android:gravity="center"
-        />
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:padding="5dp"
+            android:text="消息"
+            android:textSize="30sp" />
+
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#00ff0000"
+            android:paddingRight="12px"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/person_center" />
+
+    </RelativeLayout>
+
+
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10px"
         android:background="@drawable/border"
-        android:layout_margin="12px"
-        >
+        android:orientation="horizontal">
+
         <SearchView
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:iconifiedByDefault="false"
-            android:queryHint="请输入搜索内容"
             android:queryBackground="@null"
-            />
+            android:queryHint="请输入搜索内容" />
 
         <ListView
             android:id="@+id/listView"
@@ -39,12 +54,5 @@
     </LinearLayout>
 
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:src="@drawable/person_center"
-        android:background="#00ff0000"
-        android:paddingRight="12px"
-        />
 
 </LinearLayout>
