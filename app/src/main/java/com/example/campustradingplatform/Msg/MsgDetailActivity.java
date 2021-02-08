@@ -1,18 +1,19 @@
 package com.example.campustradingplatform.Msg;
 
-import android.content.Context;
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +37,7 @@ public class MsgDetailActivity extends AppCompatActivity {
     LinearLayout toolsLayout;
     Button sendTextBtn;
     ArrayList<MsgRowItem> msgRowItems = new ArrayList<>();
+    TextView sendVoiceline;
 
     Handler handler;
 
@@ -73,6 +75,8 @@ public class MsgDetailActivity extends AppCompatActivity {
         moreToolsbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sendVoiceline.setVisibility(View.GONE);
+                msgSendText.setVisibility(View.VISIBLE);
                 if(toolsLayout.getVisibility()==View.GONE){
                     GlobalUtil.hideKeyboard(MsgDetailActivity.this);
                     msgSendText.clearFocus(); //失去焦点
@@ -80,10 +84,7 @@ public class MsgDetailActivity extends AppCompatActivity {
                 }else{
                     //设置edittext获取焦点
                     msgSendText.requestFocus();
-                    //调用系统输入法
-                    InputMethodManager inputManager = (InputMethodManager) msgSendText
-                            .getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputManager.showSoftInput(msgSendText, 0);
+                    GlobalUtil.getKeyBoard(msgSendText);
                     toolsLayout.setVisibility(View.GONE);
                 }
             }
@@ -111,11 +112,18 @@ public class MsgDetailActivity extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus){
                     toolsLayout.setVisibility(View.GONE);
-                    moreToolsbtn.setVisibility(View.VISIBLE);
-                    sendTextBtn.setVisibility(View.GONE);
+
+                    if(msgSendText.getText().toString().trim().length()==0){
+                        moreToolsbtn.setVisibility(View.VISIBLE);
+                        sendTextBtn.setVisibility(View.GONE);
+                    }
+                    else{
+                        moreToolsbtn.setVisibility(View.GONE);
+                        sendTextBtn.setVisibility(View.VISIBLE);
+                    }
+
                     chatScrollListView.smoothScrollToPosition(msgRowItems.size());
                 }
-//                Toast.makeText(MsgDetailActivity.this,"点击编辑",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -170,7 +178,56 @@ public class MsgDetailActivity extends AppCompatActivity {
                 moreToolsbtn.setVisibility(View.VISIBLE);
             }
         });
+
+        ImageView sendVoiceBtn = (ImageView)findViewById(R.id.send_voice);
+        sendVoiceline = (TextView)findViewById(R.id.press_to_say_btn);
+
+        sendVoiceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(msgSendText.getVisibility()==View.VISIBLE){
+                    //开始发送语音消息
+                    initInputLine();
+                    sendVoiceline.setVisibility(View.VISIBLE);
+                    msgSendText.setVisibility(View.GONE);
+                }else{
+                    //发送文字消息
+                    sendVoiceline.setVisibility(View.GONE);
+                    msgSendText.setVisibility(View.VISIBLE);
+
+                    if(msgSendText.getText().toString().trim().length()!=0){
+                        moreToolsbtn.setVisibility(View.GONE);
+                        sendTextBtn.setVisibility(View.VISIBLE);
+                        msgSendText.requestFocus();
+                        GlobalUtil.getKeyBoard(msgSendText);
+                    }
+
+                }
+            }
+        });
+
+        //返回按钮
+        ImageButton returnBtn = (ImageButton)findViewById(R.id.detail_return_btn);
+        returnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MsgDetailActivity.this.finish();
+            }
+        });
+
+
     }
+
+    public void initInputLine(){
+        //全部取消，回到最初的状态
+        GlobalUtil.hideKeyboard(MsgDetailActivity.this);
+        toolsLayout.setVisibility(View.GONE);
+        moreToolsbtn.setVisibility(View.VISIBLE);
+        sendTextBtn.setVisibility(View.GONE);
+        msgSendText.clearFocus();
+    }
+
     //初始化 详细的聊天信息
     private void initMsgRows() {
         for(int i=0;i<9;i++){

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 public class GlobalUtil {
 
@@ -22,5 +23,12 @@ public class GlobalUtil {
             context = ((ContextWrapper) context).getBaseContext();
         }
         return null;
+    }
+
+    public static  void getKeyBoard(EditText editText){
+        //调用系统输入法
+        InputMethodManager inputManager = (InputMethodManager) editText
+                .getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.showSoftInput(editText, 0);
     }
 }
