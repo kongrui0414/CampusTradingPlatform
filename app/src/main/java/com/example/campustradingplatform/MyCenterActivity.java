@@ -15,6 +15,7 @@ public class MyCenterActivity extends AppCompatActivity {
         setContentView(R.layout.my_center_fragment);
 
         //对一个控件进行点击事件
+        //暂时没有用，到MyCenterFragment中实现
         LSettingItem dingdan =(LSettingItem)findViewById(R.id.item_dingdan);
         dingdan.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
             @Override
@@ -22,6 +23,8 @@ public class MyCenterActivity extends AppCompatActivity {
                 Toast.makeText(MyCenterActivity.this,"暂时没有订单",Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
     }
 }
