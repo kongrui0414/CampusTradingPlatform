@@ -1,11 +1,32 @@
 package com.example.campustradingplatform.Msg;
 
-public class MsgItem {
+import java.io.Serializable;
+
+public class MsgItem implements Serializable {
 
     private String userName;
     private String msgDetail;
     private String sendDate;
     private String headImgUrl;
+    private String convId;
+
+    private String goodId;
+
+    public String getGoodId() {
+        return goodId;
+    }
+
+    public void setGoodId(String goodId) {
+        this.goodId = goodId;
+    }
+
+    public String getConvId() {
+        return convId;
+    }
+
+    public void setConvId(String convId) {
+        this.convId = convId;
+    }
 
     public String getUserName() {
         return userName;
