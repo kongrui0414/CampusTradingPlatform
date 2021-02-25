@@ -51,18 +51,19 @@ public class HomeFragment extends Fragment {
         RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
         recyclerView.setRecycledViewPool(viewPool);
         viewPool.setMaxRecycledViews(0, 10);
+        DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager, true);
+        recyclerView.setAdapter(delegateAdapter);
         /**
          * 轮播Adapter
          */
-        BaseDelegeteAdapter bannerAdapter = new BaseDelegeteAdapter(getActivity(),
-                new LinearLayoutHelper(), R.layout.vlayout_banner, 1) {
+        final ArrayList<Object> arrayList = new ArrayList<>();
+        arrayList.add("https://gw.alicdn.com/imgextra/i3/20/O1CN01UTTfyr1C1CSm4hzOv_!!20" +
+                "-0" +
+                "-lubanu.jpg");
+        BaseAdapter bannerAdapter = new BaseAdapter(new LinearLayoutHelper(),
+                R.layout.vlayout_banner, arrayList) {
             @Override
             public void onBindViewHolder(@NonNull BaseViewHolder baseViewHolder, int i) {
-                ArrayList<Object> arrayList = new ArrayList<>();
-                arrayList.add(R.mipmap.ic_launcher);
-                arrayList.add("https://gw.alicdn.com/imgextra/i3/20/O1CN01UTTfyr1C1CSm4hzOv_!!20" +
-                        "-0" +
-                        "-lubanu.jpg");
                 arrayList.add("https://gw.alicdn.com/imgextra/i3/106/O1CN01etvHvW1CeaWUFfTu9_" +
                         "!!106-0" +
                         "-lubanu.jpg");
@@ -124,30 +125,14 @@ public class HomeFragment extends Fragment {
                 });
             }
         };
-//        BaseDelegeteAdapter menuAdapter = new BaseDelegeteAdapter(getActivity(), gridLayoutHelper,
-//                R.layout.classify_item, 4) {
-//            @Override
-//            public void onBindViewHolder(@NonNull BaseViewHolder holder, final int position) {
-//                holder.setText(R.id.classify_text, ITEM_NAMES[position] + "");
-//                holder.setImageResource(R.id.classify_image, R.mipmap.ic_launcher);
-//                holder.getView(R.id.classify_text).setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Toast.makeText(getContext(), ITEM_NAMES[position],
-//                                Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//                super.onBindViewHolder(holder, position);
-//            }
-//        };
 
 
         /**
          *Goods-list
          */
         final List<String> gridlist = new ArrayList();
-        for (int i=0;i<20;i++){
-            gridlist.add("第"+i+"项");
+        for (int i=0;i<10;i++){
+            gridlist.add("商品"+i);
         }
         GridLayoutHelper gridLayoutHelper_list = new GridLayoutHelper(2);
         gridLayoutHelper_list.setPadding(30, 20, 30, 0);
@@ -158,7 +143,9 @@ public class HomeFragment extends Fragment {
             public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.goods_describe, gridlist.get(position));
-                holder.setImageResource(R.id.goods_image, R.drawable.head);
+                String imagename = "goods"+position%5;
+                holder.setImageResource(R.id.goods_image,
+                        getResources().getIdentifier(imagename, "drawable", requireActivity().getPackageName()));
                 holder.getView(R.id.goods_item).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -168,14 +155,11 @@ public class HomeFragment extends Fragment {
             }
         };
 
-        DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager, true);
         delegateAdapter.addAdapter(bannerAdapter);
         delegateAdapter.addAdapter(menuAdapter);
         delegateAdapter.addAdapter(gridAdapter);
-
-        recyclerView.setAdapter(delegateAdapter);
     }
-    }
+}
 
 
 
