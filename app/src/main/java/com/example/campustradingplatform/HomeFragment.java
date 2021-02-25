@@ -1,14 +1,11 @@
 package com.example.campustradingplatform;
 
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,18 +13,20 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
-import com.alibaba.android.vlayout.layout.ColumnLayoutHelper;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
-import com.bumptech.glide.Glide;
-import com.example.campustradingplatform.Home.*;
-import com.sunfusheng.marqueeview.MarqueeView;
+import com.example.campustradingplatform.Deatil.GoodsDetail;
+import com.example.campustradingplatform.Home.BaseAdapter;
+import com.example.campustradingplatform.Home.BaseViewHolder;
+import com.example.campustradingplatform.Home.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
@@ -149,7 +148,9 @@ public class HomeFragment extends Fragment {
                 holder.getView(R.id.goods_item).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(getContext(), "点击", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "点击", Toast.LENGTH_SHORT).show();
+                        Intent intent =new Intent(getActivity(), GoodsDetail.class);
+                        startActivity(intent);
                     }
                 });
             }
