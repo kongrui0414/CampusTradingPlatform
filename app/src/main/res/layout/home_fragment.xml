@@ -1,30 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <scut.carson_ho.diy_view.SuperEditText
-            android:id="@+id/search_bar"
-            android:layout_width="match_parent"
-            android:layout_height="45sp"
-            app:ic_left_click="@drawable/search_click"
-            app:ic_left_unclick="@drawable/search_unclick"
-            app:left_x="0"
-            app:left_y="0"
-            app:left_width="40"
-            app:left_height="40"
+        android:layout_height="match_parent">
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:id="@+id/top"
+                    android:background="@color/colorOrange">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded_text"
+                android:layout_toLeftOf="@+id/search_button"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="1dp">
+            <scut.carson_ho.diy_view.SuperEditText
+                    android:id="@+id/search_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="搜索"
 
-            app:ic_delete="@drawable/delete"
-            app:delete_x="0"
-            app:delete_y="0"
-            app:delete_width="40"
-            app:delete_height="40"
+                    app:ic_left_click="@drawable/search_click"
+                    app:ic_left_unclick="@drawable/search_unclick"
+                    app:ic_delete="@drawable/delete"
+                    app:delete_width="35"
+                    app:delete_height="35"
+                    app:lineColor_click="@color/colorGray"
+                    app:linePosition="-5"
+                    />
+        </LinearLayout>
 
-    />
+        <Button android:id="@+id/search_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:text="搜索"
+                android:textSize="20sp"
+                android:layout_alignParentRight="true"
+                android:background="@android:color/transparent"
+        />
+    </RelativeLayout>
+
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/my_recycle_view"
-            android:layout_below="@id/search_bar"
+            android:layout_below="@id/top"
             android:scrollbars="horizontal"/>
 </RelativeLayout>
