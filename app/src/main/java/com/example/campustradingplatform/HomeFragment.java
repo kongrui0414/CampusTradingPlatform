@@ -1,6 +1,7 @@
 package com.example.campustradingplatform;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -125,7 +126,7 @@ public class HomeFragment extends Fragment {
             public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.classify_text, ITEM_NAMES[position%4]);
-                holder.setImageResource(R.id.classify_image, R.mipmap.ic_launcher);
+                holder.setImageResource(R.id.classify_image, getResourceId("mipmap","classify0"+position));
                 holder.getView(R.id.classify_item).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -153,8 +154,10 @@ public class HomeFragment extends Fragment {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.goods_describe, gridlist.get(position));
                 String imagename = "goods"+position%5;
+//                holder.setImageResource(R.id.goods_image,
+//                        getResources().getIdentifier(imagename, "drawable", requireActivity().getPackageName()));
                 holder.setImageResource(R.id.goods_image,
-                        getResources().getIdentifier(imagename, "drawable", requireActivity().getPackageName()));
+                        getResourceId("mipmap", imagename));
                 holder.getView(R.id.goods_item).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -170,6 +173,17 @@ public class HomeFragment extends Fragment {
         delegateAdapter.addAdapter(menuAdapter);
         delegateAdapter.addAdapter(gridAdapter);
     }
+    /**
+     * 根据图片名称获取图片的资源id的方法
+     * @param imageName
+     * @return
+     */
+    private int  getResourceId(String position,String imageName){
+        Context ctx=getContext();
+        int resId = getResources().getIdentifier(imageName, position , ctx.getPackageName());
+        return resId;
+    }
+
 }
 
 

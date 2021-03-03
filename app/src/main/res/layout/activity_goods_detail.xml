@@ -4,12 +4,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    />
     <ImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:src="@drawable/goods0"
+            android:src="@mipmap/goods0"
     />
 
     <TextView
@@ -39,7 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="50dp"
-                android:text="购物车"
+                android:text="联系卖家"
                 android:onClick="shopcar"
         />
         <Button
@@ -47,7 +46,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="50dp"
-                android:text="加入购物车" />
+                android:text="购买" />
 
     </LinearLayout>
 </RelativeLayout>

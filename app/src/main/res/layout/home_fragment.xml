@@ -21,9 +21,9 @@
                     android:layout_height="match_parent"
                     android:hint="搜索"
 
-                    app:ic_left_click="@drawable/search_click"
-                    app:ic_left_unclick="@drawable/search_unclick"
-                    app:ic_delete="@drawable/delete"
+                    app:ic_left_click="@mipmap/search_click"
+                    app:ic_left_unclick="@mipmap/search_unclick"
+                    app:ic_delete="@mipmap/delete"
                     app:delete_width="35"
                     app:delete_height="35"
                     app:lineColor_click="@color/colorGray"
