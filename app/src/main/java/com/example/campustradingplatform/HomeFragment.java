@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,7 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
+import com.example.campustradingplatform.Deatil.GoodList;
 import com.example.campustradingplatform.Deatil.GoodsDetail;
 import com.example.campustradingplatform.Home.BaseAdapter;
 import com.example.campustradingplatform.Home.BaseViewHolder;
@@ -30,6 +32,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
+    Button search_button;
 
     String[] ITEM_NAMES = {"天猫", "聚划算", "天猫国际", "外卖"};
 
@@ -38,7 +41,14 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment, container, false);
         recyclerView = view.findViewById(R.id.my_recycle_view);
-//        init();
+        search_button = view.findViewById(R.id.search_button);
+        search_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getActivity(), GoodList.class);
+                startActivity(intent);
+            }
+        });
         initView();
 
         return view;
