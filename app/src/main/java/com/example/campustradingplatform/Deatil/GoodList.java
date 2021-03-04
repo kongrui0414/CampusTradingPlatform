@@ -1,8 +1,10 @@
 package com.example.campustradingplatform.Deatil;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import java.util.List;
 
 public class GoodList extends AppCompatActivity {
     RecyclerView recyclerView;
+    ImageView back_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,15 @@ public class GoodList extends AppCompatActivity {
         delegateAdapter.addAdapter(gridAdapter);
 
 //        delegateAdapter.addAdapter(bannerAdapter);
+
+        back_image = findViewById(R.id.back);
+        back_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
     /**
      * 根据图片名称获取图片的资源id的方法

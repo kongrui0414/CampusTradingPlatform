@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     Button search_button;
 
-    String[] ITEM_NAMES = {"天猫", "聚划算", "天猫国际", "外卖"};
+    String[] ITEM_NAMES = {"回收", "资料", "拼车", "同城"};
 
     @Nullable
     @Override

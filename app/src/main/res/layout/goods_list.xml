@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:id="@+id/top"
                     android:background="@color/colorOrange">
+        <ImageView
+                android:id="@+id/back"
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/back"
+        />
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/rounded_text"
                 android:layout_toLeftOf="@+id/search_button"
+                android:layout_toRightOf="@id/back"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="1dp">
             <scut.carson_ho.diy_view.SuperEditText
