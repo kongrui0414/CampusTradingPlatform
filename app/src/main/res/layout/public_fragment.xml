@@ -1,12 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="public"
-        />
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout style="@style/PersonalMainLayoutStyle">
+
+                <EditText
+                    android:id="@+id/borrow_item_title_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@null"
+                    android:hint="商品名称"
+                    android:textSize="14sp" />
+
+                <View style="@style/PersonalLine" />
+
+                <EditText
+                    android:id="@+id/borrow_item_description_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@null"
+                    android:fadeScrollbars="true"
+                    android:gravity="start"
+                    android:hint="@string/publish_item_description_et_msg"
+                    android:inputType="textMultiLine"
+                    android:minLines="3"
+                    android:scrollbars="vertical"
+                    android:textSize="14sp" />
+
+                <View style="@style/PersonalLine" />
+
+                <RelativeLayout
+                    style="@style/PersonalNormalStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <TextView
+                        android:id="@+id/borrow_price_textview"
+                        style="@style/PersonalTextStyle"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="14sp"
+                        android:text="原价"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/borrow_price_money_symbol"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="4sp"
+                        android:layout_toRightOf="@id/borrow_price_textview"
+                        android:src="@drawable/money_symbol_32" />
+
+                    <EditText
+                        android:id="@+id/borrow_price_default"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/borrow_price_money_symbol"
+                        android:background="@null"
+                        android:hint="商品原价"
+                        android:inputType="number"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    style="@style/PersonalNormalStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <TextView
+                        android:id="@+id/borrow_nowprice"
+                        style="@style/PersonalTextStyle"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="14sp"
+                        android:text="现价"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/borrow_price_money_symbol"
+                        android:layout_width="14sp"
+                        android:layout_height="14sp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="4sp"
+                        android:layout_toRightOf="@id/borrow_nowprice"
+                        android:src="@drawable/money_symbol_32"
+                        tools:ignore="DuplicateIds" />
+
+                    <EditText
+                        android:id="@+id/nowprice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/borrow_price_money_symbol"
+                        android:background="@null"
+                        android:hint="商品现在"
+                        android:inputType="number"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                </RelativeLayout>
+
+                <View style="@style/PersonalLine" />
+
+                <RelativeLayout
+                    android:id="@+id/borrow_classification_layout_click"
+                    style="@style/PersonalNormalStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:onClick="true"
+                    tools:ignore="OnClick">
+
+                    <TextView
+                        android:id="@+id/borrow_classification_textview"
+                        style="@style/PersonalTextStyle"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="14sp"
+                        android:text="@string/publish_classification_title_msg"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/borrow_classification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="14sp"
+                        android:layout_toRightOf="@id/borrow_classification_textview"
+                        android:text="@string/publish_classification"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/borrow_classification_imgbtn"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="14sp"
+                        android:layout_height="14sp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:src="@drawable/android_list_idex" />
+                </RelativeLayout>
+
+                <View style="@style/PersonalLine" />
+                <!--时间选择器-->
+                <RelativeLayout
+                    android:id="@+id/borrow_deadline_date_layout_click"
+                    style="@style/PersonalNormalStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <TextView
+                        android:id="@+id/borrow_deadline_date_textview"
+                        style="@style/PersonalTextStyle"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="14sp"
+                        android:text="新旧程度"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/borrow_deadline_date_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="14sp"
+                        android:layout_toRightOf="@id/borrow_deadline_date_textview"
+                        android:background="@null"
+                        android:clickable="true"
+                        android:hint="请描述商品的新旧程度"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <View style="@style/PersonalLine" />
+
+                <RelativeLayout
+                    android:id="@+id/borrow_deadline_time_layout_click"
+                    style="@style/PersonalNormalStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <TextView
+                        android:id="@+id/borrow_deadline_time_textview"
+                        style="@style/PersonalTextStyle"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="14sp"
+                        android:text="位置"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/borrow_deadline_time_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@id/borrow_deadline_time_textview"
+                        android:background="@null"
+                        android:clickable="true"
+                        android:hint="您的位置"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/publish"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="14dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="14dp"
+                android:background="#ffcc00"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="发布"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

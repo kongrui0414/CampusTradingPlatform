@@ -1,6 +1,21 @@
 <resources>
     <string name="app_name">CampusTradingPlatform</string>
-    <string name="title_home">home</string>
-    <string name="title_dashboard">home</string>
-    <string name="title_notifications">home</string>
+    <string name="title_home">首页</string>
+    <string name="title_dashboard">分类</string>
+    <string name="title_notifications">消息</string>
+
+    <string name="publish_title">我要发布</string>
+    <string name="publish_btn_msg">确认发布</string>
+    <string name="publish_item_title_et_msg">标题</string>
+    <string name="publish_item_description_et_msg">描述一下你的闲置</string>
+    <string name="publish_price_title_msg">价格</string>
+    <string name="publish_original_title_msg">原价</string>
+    <string name="publish_default_price">0.00</string>
+    <string name="publish_classification">请选择分类</string>
+    <string name="publish_classification_title_msg">分类</string>
+    <string name="publish_category_list_title">类目</string>
+    <string name="publish_money_symbol">¥</string>
+
+    <string name="buying_title">我要求购</string>
+    <string name="buying_btn_msg">确认求购</string>
 </resources>

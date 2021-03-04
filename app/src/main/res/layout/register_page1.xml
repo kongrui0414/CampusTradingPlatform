@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.circularreveal.CircularRevealRelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="注册"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="35dp" />
+
+    <TextView
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="43dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="用户名:"
+        android:textColor="#000"
+        android:textSize="22dp" />
+
+    <TextView
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="    姓名:"
+        android:textColor="#000"
+        android:textSize="22dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="270dp"
+        android:padding="20dp"
+        android:text="    性别:"
+        android:textColor="#000"
+        android:textSize="22dp" />
+
+    <TextView
+        android:layout_marginTop="340dp"
+        android:layout_marginLeft="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="    学校:"
+        android:textColor="#000"
+        android:textSize="22dp" />
+
+    <TextView
+        android:layout_marginTop="410dp"
+        android:layout_marginLeft="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="    身份:"
+        android:textColor="#000"
+        android:textSize="22dp" />
+
+    <TextView
+        android:layout_marginTop="480dp"
+        android:layout_marginLeft="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="学号/工号:"
+        android:textColor="#000"
+        android:textSize="22dp" />
+
+    <EditText
+        android:id="@+id/register_name"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="155dp"
+        android:layout_marginTop="145dp"
+        android:layout_weight="2"
+        android:hint="请输入用户名"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/register_realName"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="155dp"
+        android:layout_marginTop="215dp"
+        android:layout_weight="2"
+        android:hint="请输入您的姓名"
+        android:textSize="20dp" />
+
+
+    <RadioGroup
+        android:id="@+id/register_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="285dp"
+        android:layout_marginLeft="155dp"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/register_man"
+            android:layout_width="wrap_content"
+            android:layout_height="100px"
+            android:layout_marginLeft="20dp"
+            android:text="男"
+            android:textSize="20dp"/>
+        <RadioButton
+            android:id="@+id/register_woman"
+            android:layout_width="wrap_content"
+            android:layout_height="100px"
+            android:layout_marginLeft="20dp"
+            android:text="女"
+            android:textSize="20dp"/>
+    </RadioGroup>
+
+
+    <EditText
+        android:id="@+id/register_school"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="155dp"
+        android:layout_marginTop="355dp"
+        android:layout_weight="2"
+        android:hint="请输入您所在学校"
+        android:textSize="20dp" />
+
+
+    <RadioGroup
+        android:id="@+id/register_identity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="425dp"
+        android:layout_marginLeft="155dp"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/register_student"
+            android:layout_width="wrap_content"
+            android:layout_height="100px"
+            android:layout_marginLeft="15dp"
+            android:text="学生"
+            android:textSize="20dp"/>
+        <RadioButton
+            android:id="@+id/register_teacher"
+            android:layout_width="wrap_content"
+            android:layout_height="100px"
+            android:layout_marginLeft="15dp"
+            android:text="教职工"
+            android:textSize="20dp"/>
+    </RadioGroup>
+
+
+    <EditText
+        android:id="@+id/register_No"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="155dp"
+        android:layout_marginTop="495dp"
+        android:layout_weight="2"
+        android:hint="请输入您的学号/工号"
+        android:inputType="number"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/register_nextPage"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="580dp"
+        android:text="下一步"
+        android:textSize="20dp"
+        android:background="@drawable/button_circle_shape"
+        />
+
+
+
+</com.google.android.material.circularreveal.CircularRevealRelativeLayout>
