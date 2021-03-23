@@ -2,18 +2,15 @@ package com.example.campustradingplatform;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.campustradingplatform.Login.User;
 import com.leon.lib.settingview.LSettingItem;
 
 /**
@@ -21,21 +18,11 @@ import com.leon.lib.settingview.LSettingItem;
  */
 
 public class MyCenterFragment extends Fragment {
-    private User user;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_center_fragment, container, false);
-
-        TextView my_center_username_text =(TextView)view.findViewById(R.id.my_center_username);     //获取个人主页中的用户名TextView对象
-        my_center_username_text.setText(user.getUserName());                                        //显示用户名
-
         return view;
-    }
-
-    public void getUser(User user){//获取用户类对象的方法
-        this.user = user;
     }
 
     @Override

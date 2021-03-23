@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.example.campustradingplatform.MainActivity;
 import com.example.campustradingplatform.R;
 
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -24,11 +23,11 @@ import java.sql.SQLException;
 
 public class Login extends AppCompatActivity {
     //连接的数据库
-    String url = "jdbc:mysql://121.37.212.124:3306/ctp";
+    String url = "jdbc:mysql://gz-cdb-6zhyn1xd.sql.tencentcdb.com:59106/ctp";
     //连接数据库的用户名
     String userName = "root";
     //连接数据库的密码
-    String psw = "ABC123!!";
+    String psw = "zjj123!@";
     Connection connection = null;
 
     EditText edPhoneNum;
@@ -63,17 +62,7 @@ public class Login extends AppCompatActivity {
                 ps.setString(2,Psw);
                 ResultSet rs = ps.executeQuery();
                 if(rs.next()){
-                    User user = new User();
-                    user.setName(rs.getString("name"));
-                    user.setPhoneNum(rs.getString("phoneNum"));
-                    user.setIdNum(rs.getString("idNum"));
-                    user.setIdentity(rs.getString("identity"));
-                    user.setUserName(rs.getString("username"));
-                    user.setSchool(rs.getString("school"));
-                    user.setPsw(rs.getString("psw"));
-                    user.setSex(rs.getString("sex"));
                     Intent intent = new Intent(Login.this,MainActivity.class);
-                    intent.putExtra("user2", (Serializable) user);
                     startActivity(intent);
                 }else {
                     Toast.makeText(Login.this,"登录失败，请检查用户名和密码",Toast.LENGTH_SHORT).show();
@@ -92,6 +81,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_login1);
+
         final Button Login = (Button)findViewById(R.id.login_login);
         Login.setOnClickListener(new View.OnClickListener() {
             @Override

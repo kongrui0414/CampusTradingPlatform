@@ -23,11 +23,11 @@ import static java.lang.Class.forName;
 public class Register2 extends AppCompatActivity {
 
     //连接的数据库
-    String url = "jdbc:mysql://121.37.212.124:3306/ctp";
+    String url = "jdbc:mysql://gz-cdb-6zhyn1xd.sql.tencentcdb.com:59106/ctp";
     //连接数据库的用户名
     String userName = "root";
     //连接数据库的密码
-    String psw = "ABC123!!";
+    String psw = "zjj123!@";
     Connection connection = null;
 
     User user;
