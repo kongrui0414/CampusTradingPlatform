@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.campustradingplatform.Login.User;
 import com.example.campustradingplatform.Msg.MsgPanelObj;
 import com.example.campustradingplatform.Msg.MsgRowItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -47,10 +49,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private Fragment[] fragments;
 
+    private User user;          //用户类，用于储存登录的用户信息
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        user = (User)getIntent().getSerializableExtra("user2"); //接收成功登录后用户储存用户信息的用户类对象。可用用户类的方法获取用户的各种信息。
+
         navigation = this.findViewById(R.id.navigation);
         initFragments();
 
@@ -119,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         thirdFragment = new PublicFragment();
         fourthFragment = new MsgListFragment();
         fifthFragment = new MyCenterFragment();
+        fifthFragment.getUser(user);        //将用户传给MyCenterFragment
         fragments = new Fragment[]{firstFragment, secondFragment, thirdFragment,fourthFragment,fifthFragment};
         lastSelectedPosition = 0;
 //        //默认提交第一个
