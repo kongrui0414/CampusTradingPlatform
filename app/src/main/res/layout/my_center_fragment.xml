@@ -29,6 +29,7 @@
                 leon:civ_border_width="2dp" />
 
             <TextView
+                android:id="@+id/my_center_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
