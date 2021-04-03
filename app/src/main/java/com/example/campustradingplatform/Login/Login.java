@@ -46,9 +46,9 @@ public class Login extends AppCompatActivity {
             try {
                 //加载mysql驱动
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
-                Log.d("aaa","加载数据库驱动成功");
+                Log.d("zjj","加载数据库驱动成功");
             } catch (Exception e) {
-                Log.d("aaa","加载数据库驱动失败！");
+                Log.d("zjj","加载数据库驱动失败！");
                 e.printStackTrace();
             }
 
@@ -64,6 +64,7 @@ public class Login extends AppCompatActivity {
                 ResultSet rs = ps.executeQuery();
                 if(rs.next()){
                     User user = new User();
+                    user.setId(Integer.parseInt(rs.getString("id")));
                     user.setName(rs.getString("name"));
                     user.setPhoneNum(rs.getString("phoneNum"));
                     user.setIdNum(rs.getString("idNum"));
@@ -80,7 +81,7 @@ public class Login extends AppCompatActivity {
                 }
                 connection.close();
             }catch (Exception e){
-                Log.d("aaa","连接数据库失败");
+                Log.d("zjj","连接数据库失败");
                 e.printStackTrace();
             }
             Looper.loop();

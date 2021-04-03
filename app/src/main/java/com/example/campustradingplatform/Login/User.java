@@ -3,6 +3,7 @@ package com.example.campustradingplatform.Login;
 import java.io.Serializable;
 
 public class User implements Serializable {
+    private int id;                 //用户id号
     private String phoneNum;        //手机号
     private String psw;             //密码
     private String userName;        //用户名
@@ -79,7 +80,16 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String phoneNum, String psw, String userName, String name, String sex, String school, String identity, String idNum) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public User(int id, String phoneNum, String psw, String userName, String name, String sex, String school, String identity, String idNum) {
+        this.id = id;
         this.phoneNum = phoneNum;
         this.psw = psw;
         this.userName = userName;

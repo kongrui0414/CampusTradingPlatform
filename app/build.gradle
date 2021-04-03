@@ -80,4 +80,7 @@ dependencies {
     //-------------本地数据库
     implementation'org.litepal.android:core:1.6.1'
 
+
+    //卡片式布局
+    implementation "androidx.cardview:cardview:1.0.0"
 }

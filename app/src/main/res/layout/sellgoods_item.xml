@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/order_cardView"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_margin="15dp"
+    card_view:cardCornerRadius="7dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/sellgoods_shangpinming"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="商品名："
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/sellgoods_goodsName"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/sellgoods_shangpinming"
+            android:text="可燃乌龙茶测试一下最大长度而已"
+            android:textSize="15sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:visibility="visible"/>
+
+        <EditText
+            android:id="@+id/sellgoods_editGoodsName"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/sellgoods_shangpinming"
+            android:textSize="15sp"
+            android:maxLines="1"
+            android:visibility="invisible"
+            android:background="@null"/>
+
+        <TextView
+            android:id="@+id/sellgoods_yuanjia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sellgoods_shangpinming"
+            android:layout_marginLeft="10dp"
+            android:text="原价："
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/sellgoods_originalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sellgoods_shangpinming"
+            android:layout_toRightOf="@+id/sellgoods_yuanjia"
+            android:text="199.0"
+            android:textSize="15sp"
+            android:visibility="visible"/>
+
+        <EditText
+            android:id="@+id/sellgoods_editOriginalPrice"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sellgoods_shangpinming"
+            android:layout_toRightOf="@+id/sellgoods_yuanjia"
+            android:textSize="15sp"
+            android:visibility="invisible"
+            android:background="@null"/>
+
+        <TextView
+            android:id="@+id/sellgoods_xianjia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sellgoods_yuanjia"
+            android:layout_marginLeft="10dp"
+            android:text="现价："
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/sellgoods_presentPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sellgoods_yuanjia"
+            android:layout_toRightOf="@+id/sellgoods_xianjia"
+            android:text="19.9"
+            android:textSize="15sp"
+            android:visibility="visible"/>
+
+        <EditText
+            android:id="@+id/sellgoods_editPresentPrice"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sellgoods_yuanjia"
+            android:layout_toRightOf="@+id/sellgoods_xianjia"
+            android:textSize="15sp"
+            android:visibility="invisible"
+            android:background="@null"/>
+
+        <TextView
+            android:id="@+id/sellgoods_xinjiuchengdu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sellgoods_xianjia"
+            android:layout_marginLeft="10dp"
+            android:text="新旧程度："
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/sellgoods_oldorNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sellgoods_xianjia"
+            android:layout_toRightOf="@+id/sellgoods_xinjiuchengdu"
+            android:text="还没买到"
+            android:textSize="15sp"
+            android:visibility="visible"/>
+
+        <EditText
+            android:id="@+id/sellgoods_editOldOrNew"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sellgoods_xianjia"
+            android:layout_toRightOf="@+id/sellgoods_xinjiuchengdu"
+            android:textSize="15sp"
+            android:visibility="invisible"
+            android:background="@null"/>
+
+        <TextView
+            android:id="@+id/sellgoods_miaoshu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="描述:"
+            android:layout_toRightOf="@+id/sellgoods_goodsName"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15dp"/>
+        
+        <TextView
+            android:id="@+id/sellgoods_description"
+            android:layout_width="170dp"
+            android:layout_height="75dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/sellgoods_miaoshu"
+            android:layout_toRightOf="@+id/sellgoods_goodsName"
+            android:text="我就是想测试一下最大长度我就是想测试一下最大长度我就是想测试一下最大长度我就是想测试一下最大长度我就是想测试一下最大长度我就是想测试一下最大长度我就是想测试一下最大长度我就是想测试一下最大长度我就是想测试一下最大长度我就是想测试一下最大长度我就是想测试一下最大长度"
+            android:textSize="10dp"
+            android:maxLines="5"
+            android:ellipsize="end"
+            android:visibility="visible"/>
+
+        <EditText
+            android:id="@+id/sellgoods_editDescription"
+            android:layout_width="170dp"
+            android:layout_height="75dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/sellgoods_miaoshu"
+            android:layout_toRightOf="@+id/sellgoods_goodsName"
+            android:textSize="10dp"
+            android:maxLines="5"
+            android:ellipsize="end"
+            android:visibility="invisible"
+            android:background="@null" />
+
+        <TextView
+            android:id="@+id/sellgoods_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="2020.12.02 18:03:53"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/sellgoods_shangjiashijian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/sellgoods_time"
+            android:layout_marginLeft="10dp"
+            android:text="上架时间："
+            android:textSize="10sp" />
+
+        <Button
+            android:id="@+id/sellgoods_editGoods"
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:text="编辑商品"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/sellgoods_saveGoods"
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:text="保存编辑"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

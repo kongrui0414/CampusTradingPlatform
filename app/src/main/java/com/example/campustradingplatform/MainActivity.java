@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         thirdFragment = new PublicFragment();
         fourthFragment = new MsgListFragment();
         fifthFragment = new MyCenterFragment();
-        fifthFragment.getUser(user);        //将用户传给MyCenterFragment
+        fifthFragment.setUser(user);        //将用户传给MyCenterFragment
         fragments = new Fragment[]{firstFragment, secondFragment, thirdFragment,fourthFragment,fifthFragment};
         lastSelectedPosition = 0;
 //        //默认提交第一个
