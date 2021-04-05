@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Chat.SellerOrderManyActivity"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/dp6"
+        android:background="@color/yellow_bright">
+
+        <ImageButton
+            android:id="@+id/buyer_order_return"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:background="#00ff0000"
+            android:paddingLeft="12dp"
+            android:src="@drawable/back" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="10px"
+            android:background="@drawable/border"
+            android:orientation="horizontal"
+            >
+
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:iconifiedByDefault="false"
+                android:queryBackground="@null"
+                android:queryHint="请输入搜索内容" />
+
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+            android:background="@color/yellow_bright">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="待同意"
+                android:id="@+id/order_wait_deal_frag"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:textSize="16dp"
+                android:layout_marginLeft="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="待完成"
+                android:id="@+id/order_wait_finish_frag"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:textSize="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="等待退款"
+                android:id="@+id/order_wait_refund_frag"
+                android:layout_gravity="center"
+                android:textSize="16dp"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已完成"
+                android:id="@+id/order_finished_frag"
+                android:layout_gravity="center"
+                android:textSize="16dp"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp" />
+
+        </LinearLayout>
+        <!--<LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorAccent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical">
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="AFRobot"
+                    android:id="@+id/textView_topTitle"
+                    android:textSize="18dp"
+                    android:layout_gravity="center_vertical"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"></LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>-->
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/myViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="0dp">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/content"></FrameLayout>
+        </androidx.viewpager.widget.ViewPager>
+
+    </LinearLayout>
+</LinearLayout>

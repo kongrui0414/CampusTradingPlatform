@@ -39,6 +39,7 @@
 
 
     <EditText
+        android:text="110"
         android:id="@+id/login_phoneNum"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
@@ -52,6 +53,7 @@
 
 
     <EditText
+        android:text="123"
         android:id="@+id/login_password"
         android:inputType="textPassword"
         android:layout_width="200dp"

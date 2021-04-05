@@ -12,6 +12,30 @@ public class User implements Serializable {
     private String school;          //学校
     private String identity;       //true为学生，false为教职工
     private String idNum;           //学号或者是工号
+    private boolean isBuyer=true;  //是不是买家
+    private String  addr;           //本人当前的地理位置
+
+    public User(int id, boolean isBuyer) {
+        this.id = id;
+        this.isBuyer = isBuyer;
+    }
+
+
+    public boolean isBuyer() {
+        return isBuyer;
+    }
+
+    public void setIsBuyer(boolean buyer) {
+        isBuyer = buyer;
+    }
+
+    public String getAddr() {
+        return addr;
+    }
+
+    public void setAddr(String addr) {
+        this.addr = addr;
+    }
 
     public String getPhoneNum() {
         return phoneNum;
@@ -100,4 +124,20 @@ public class User implements Serializable {
         this.idNum = idNum;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", phoneNum='" + phoneNum + '\'' +
+                ", psw='" + psw + '\'' +
+                ", userName='" + userName + '\'' +
+                ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", school='" + school + '\'' +
+                ", identity='" + identity + '\'' +
+                ", idNum='" + idNum + '\'' +
+                ", isBuyer=" + isBuyer +
+                ", addr='" + addr + '\'' +
+                '}';
+    }
 }

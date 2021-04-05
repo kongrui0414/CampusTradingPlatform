@@ -1,11 +1,7 @@
 package com.example.campustradingplatform;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,27 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.campustradingplatform.Login.User;
-import com.example.campustradingplatform.Msg.MsgPanelObj;
-import com.example.campustradingplatform.Msg.MsgRowItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import org.litepal.crud.DataSupport;
-import org.litepal.tablemanager.Connector;
-
-import java.util.Arrays;
-import java.util.List;
-
-import cn.leancloud.im.v2.AVIMClient;
-import cn.leancloud.im.v2.AVIMConversation;
-import cn.leancloud.im.v2.AVIMConversationsQuery;
-import cn.leancloud.im.v2.AVIMException;
-import cn.leancloud.im.v2.AVIMMessage;
-import cn.leancloud.im.v2.callback.AVIMClientCallback;
-import cn.leancloud.im.v2.callback.AVIMConversationCallback;
-import cn.leancloud.im.v2.callback.AVIMConversationCreatedCallback;
-import cn.leancloud.im.v2.callback.AVIMConversationQueryCallback;
-import cn.leancloud.im.v2.callback.AVIMMessagesQueryCallback;
-import cn.leancloud.im.v2.messages.AVIMTextMessage;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -44,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private HomeFragment firstFragment;
     private DivideFragment secondFragment;
     private PublicFragment thirdFragment;
-    private MsgListFragment fourthFragment;
+    private MainChatFragment fourthFragment;
     private MyCenterFragment fifthFragment;
 
     private Fragment[] fragments;
@@ -61,56 +37,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         navigation = this.findViewById(R.id.navigation);
         initFragments();
 
-//        TomSend();
 
-        SQLiteDatabase db = Connector.getDatabase();
-        Log.d("20182005050", "onCreate: 创建数据库成功");
-
-        MsgRowItem msgRowItem1 = new MsgRowItem();
-        msgRowItem1.setMsgRowCon("因为爱情");
-        msgRowItem1.save();
-
-        MsgRowItem msgRowItem2 = new MsgRowItem();
-        msgRowItem2.setMsgRowCon("因为爱情");
-        msgRowItem2.save();
-
-        MsgPanelObj msgPanelObj = new MsgPanelObj();
-        msgPanelObj.getMsgRowItemList().add(msgRowItem1);
-        msgPanelObj.getMsgRowItemList().add(msgRowItem2);
-
-        msgPanelObj.save();
-
-        MsgPanelObj msgPanelObj1 = DataSupport.findLast(MsgPanelObj.class,true);
-
-        MsgRowItem msgRowItem3 = DataSupport.findLast(MsgRowItem.class,true);
-
-        Log.e("20182005050", msgPanelObj1.toString());
-        Log.e("20182005050", msgRowItem3.toString());
-
-//        List<MsgRowItem> itemList = new ArrayList<>();
-//
-//        for(int i=0;i<5;i++){
-//            MsgPanelObj panelObj = new MsgPanelObj();
-//            for(int j=0;j<5;j++){
-//                MsgRowItem item = new MsgRowItem();
-//                item.setMsgRowCon("content:"+i);
-//                item.save();
-//                itemList.add(item);
-//            }
-//            panelObj.setMsgRowItemList(itemList);
-//            DataSupport.saveAll(itemList);
-//            panelObj.save();
-//        }
-//
-//        List<MsgPanelObj> lists = DataSupport.findAll(MsgPanelObj.class);
-//        for(int i=0;i<lists.size();i++){
-//            Log.d("20182005050", "List<PanelObj>"+i);
-//            MsgPanelObj panelObjs  = (MsgPanelObj)lists.get(i);
-//            List<MsgRowItem> chatItems = panelObjs.getMsgRowItemList();
-//            for(int j=0;j<chatItems.size();j++){
-//                Log.d("20182005050", "chatItems"+i+":"+chatItems.get(i).getMsgRowCon());
-//            }
-//        }
 
     }
 
@@ -124,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         firstFragment = new HomeFragment();
         secondFragment = new DivideFragment();
         thirdFragment = new PublicFragment();
-        fourthFragment = new MsgListFragment();
+        fourthFragment = new MainChatFragment();
         fifthFragment = new MyCenterFragment();
         fifthFragment.setUser(user);        //将用户传给MyCenterFragment
         fragments = new Fragment[]{firstFragment, secondFragment, thirdFragment,fourthFragment,fifthFragment};
@@ -236,110 +163,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 //        }
 //    }
 
-    public void TomSend(){
-        // Tom 创建了一个 client，用自己的名字作为 clientId 登录
-        // clientId 为 Tom
-        AVIMClient tom = AVIMClient.getInstance("Tom");
 
-        // Tom 登录
-        tom.open(new AVIMClientCallback() {
-            @Override
-            public void done(AVIMClient client, AVIMException e) {
-                if (e == null) {
-                    // 成功打开连接
-                    Log.d("20182005050", "done: tom连接成功");
-
-                    //查询会话列表-----------------------------------------------------
-                    AVIMConversationsQuery query = client.getConversationsQuery();
-                    // 按对话的创建时间降序
-                    query.orderByDescending("createdAt");
-
-                    query.whereContainsIn("m", Arrays.asList("Tom"));
-                    // 执行查询
-                    query.findInBackground(new AVIMConversationQueryCallback(){
-                        @Override
-                        public void done(List<AVIMConversation> convs,AVIMException e){
-                            if(e == null){
-                                // convs 就是想要的结果
-                                if(convs != null && !convs.isEmpty()) {
-                                    // 获取符合查询条件的 conversation 列表
-                                    Log.d("20182005050", "会话列表长度:"+convs.size());
-                                    for(int i=0;i<convs.size();i++){
-                                        Log.d("20182005050", "convs with: "+convs.get(i).getMembers());
-                                        getMsgsByConLimit(convs.get(i),10);
-                                    }
-                                }
-                            }
-                        }
-                    });
-
-                }
-            }
-        });
-
-
-//
-
-
-        //创建对话 AVIMConversation,Tom已经登录
-        tom.createConversation(Arrays.asList("Jerry"), "Tom & Jerry", null, false, true,
-                new AVIMConversationCreatedCallback() {
-                    @Override
-                    public void done(AVIMConversation conversation, AVIMException e) {
-                        if(e == null) {
-                            // 创建成功，设置要发送的消息
-                            getMsgsByConLimit(conversation,10);
-                            sendMyMsg(conversation);
-                        }
-                    }
-                });
-
-        //创建对话 AVIMConversation,Tom已经登录
-        tom.createConversation(Arrays.asList("Jerry2"), "Tom & Jerry2", null, false, true,
-                new AVIMConversationCreatedCallback() {
-                    @Override
-                    public void done(AVIMConversation conversation, AVIMException e) {
-                        if(e == null) {
-                            // 创建成功，设置要发送的消息
-                            getMsgsByConLimit(conversation,10);
-                            sendMyMsg(conversation);
-                        }
-                    }
-                });
-    }
-
-    //发送信息
-    private void sendMyMsg(AVIMConversation conversation) {
-        AVIMTextMessage msg = new AVIMTextMessage();
-        msg.setText("Jerry，起床了heihei44444！");
-        // 发送消息
-        conversation.sendMessage(msg, new AVIMConversationCallback() {
-            @Override
-            public void done(AVIMException e) {
-                if (e == null) {
-                    Log.d("20182005050", "发送成功！");
-                    Toast.makeText(MainActivity.this,"发送消息成功",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-
-    //获取聊天记录
-    private void getMsgsByConLimit(AVIMConversation conversation,int limit){
-        // limit 取值范围 1~100，如调用 queryMessages 时不带 limit 参数，默认获取 20 条消息记录
-        conversation.queryMessages(limit, new AVIMMessagesQueryCallback() {
-            @Override
-            public void done(List<AVIMMessage> messages, AVIMException e) {
-                if (e == null) {
-                    // 成功获取最新 10 条消息记录
-                    for(int i=0;i<messages.size();i++){
-                        Log.d("20182005050", "done: "+i+":"+((AVIMTextMessage)messages.get(i)).getText());
-                    }
-                }
-            }
-        });
-    }
 
 }
 

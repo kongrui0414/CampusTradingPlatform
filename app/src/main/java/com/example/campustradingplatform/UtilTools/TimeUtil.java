@@ -3,9 +3,25 @@ package com.example.campustradingplatform.UtilTools;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class TimeUtil {
 
+
+
+    public static String getCurrentTime(){
+        // 基于静态函数创建
+        TimeZone time = TimeZone.getTimeZone("Etc/GMT-8");  //转换为中国时区
+        TimeZone.setDefault(time);
+
+
+        Date d = new Date();
+        System.out.println(d);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateNowStr = sdf.format(d);
+        return dateNowStr;
+    }
 
     /**
      * 判断当前日期是星期几
@@ -56,6 +72,16 @@ public class TimeUtil {
             Week += "六";
         }
         return Week;
+    }
+
+    public static Date strToDate(String s){
+        if(null == s|| "".equals(s)) return null;
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
