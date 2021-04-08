@@ -3,7 +3,7 @@
     <dbname value="chatmsg_db"></dbname>
     <version value="2"></version>
     <list>
-        <mapping class="com.example.campustradingplatform.Msg.MsgPanelObj"></mapping>
-        <mapping class="com.example.campustradingplatform.Msg.MsgRowItem"></mapping>
+        <mapping class="com.example.campustradingplatform.Chat.MsgPanelObj"></mapping>
+        <mapping class="com.example.campustradingplatform.Chat.MsgRowItem"></mapping>
     </list>
 </litepal>

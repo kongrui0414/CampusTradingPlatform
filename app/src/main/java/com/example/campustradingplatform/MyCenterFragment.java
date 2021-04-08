@@ -2,29 +2,19 @@ package com.example.campustradingplatform;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.campustradingplatform.Login.Login;
-import com.example.campustradingplatform.Login.Register1;
-import com.example.campustradingplatform.Login.Register2;
 import com.example.campustradingplatform.Login.User;
 import com.leon.lib.settingview.LSettingItem;
 
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 /**
  * Created by 武当山道士 on 2017/8/16.
@@ -66,9 +56,9 @@ public class MyCenterFragment extends Fragment {
         dingdan.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
             @Override
             public void click() {
-                Intent intent = new Intent(getActivity(), MyCenter_myOrders.class);
-                intent.putExtra("user", (Serializable) user);   //将user对象传给MyCenter_myOrder
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), MyCenter_myOrders.class);
+//                intent.putExtra("user", (Serializable) user);   //将user对象传给MyCenter_myOrder
+//                startActivity(intent);
             }
         });
         zaishou.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {

@@ -1,8 +1,9 @@
 package com.example.campustradingplatform.Goods;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Goods {
+public class Goods implements Serializable {
     private int sellerId;           //卖家id
     private int goodsId;            //商品id
     private String goodsName;       //商品名称
@@ -24,6 +25,10 @@ public class Goods {
     }
 
     public Goods() {
+    }
+
+    public Goods(int goodsId) {
+        this.goodsId = goodsId;
     }
 
     public int getSellerId() {
@@ -88,5 +93,19 @@ public class Goods {
 
     public void setLaunchTime(Date launchTime) {
         this.launchTime = launchTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "sellerId=" + sellerId +
+                ", goodsId=" + goodsId +
+                ", goodsName='" + goodsName + '\'' +
+                ", description='" + description + '\'' +
+                ", originalPrice=" + originalPrice +
+                ", presentPrice=" + presentPrice +
+                ", oldorNew='" + oldorNew + '\'' +
+                ", launchTime=" + launchTime +
+                '}';
     }
 }

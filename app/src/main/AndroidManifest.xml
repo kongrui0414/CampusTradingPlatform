@@ -9,6 +9,19 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- //百度地图使用 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".MyLeanCloudApp"
@@ -19,9 +32,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MyCenter_mySellGoods"></activity>
-        <activity android:name=".MyCenter_myOrders" />
-        <activity android:name=".Msg.MsgDetailActivity" />
+        <activity android:name=".Chat.SellerOrderManyActivity"></activity>
+        <activity android:name=".Chat.BuyerOrderManyActivity" />
+        <activity android:name=".Chat.BaiduMapActivity" />
+        <activity android:name=".Chat.PayCheckActivity" />
+        <activity android:name=".Chat.ChatDetailActivity" />
+        <activity android:name=".MyCenter_mySellGoods" />
         <activity android:name=".DividedActivity" />
         <activity android:name=".PublishOk" />
         <activity
@@ -58,6 +74,15 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="0BKnoUoHE4vjD8bWintajAboMd1SDPxx" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
     </application>
 
 </manifest>
