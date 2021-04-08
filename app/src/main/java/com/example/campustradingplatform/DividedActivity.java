@@ -1,19 +1,30 @@
 package com.example.campustradingplatform;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.campustradingplatform.Goods.MyGoods;
+import com.example.campustradingplatform.adapter.GoodsAdapter;
 import com.example.campustradingplatform.fragment.ProTypeFragment;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * @author Rui
@@ -29,15 +40,48 @@ public class DividedActivity extends FragmentActivity {
     private int currentItem = 0;
     private ShopAdapter shopAdapter;
 
+    private DrawerLayout mDrawerLayout;
+
+    private MyGoods[] myGoods={new MyGoods("Basketball",R.drawable.basketball),
+            new MyGoods("Racket",R.drawable.racket),
+            new MyGoods("Watch",R.drawable.watch),
+            new MyGoods("Book",R.drawable.book),
+            new MyGoods("iPhone",R.drawable.iphone),
+            new MyGoods("Shoes",R.drawable.shoes)};
+
+    private List<MyGoods> myGoodsList=new ArrayList<>();
+    private GoodsAdapter adapterCard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scrollgrid);
-        scrollView = (ScrollView) findViewById(R.id.tools_scrlllview);
-        shopAdapter = new ShopAdapter(getSupportFragmentManager());
-        inflater = LayoutInflater.from(this);
-        showToolsView();
-        initPager();
+        Log.d("abc123","setContentView前");
+        setContentView(R.layout.divide_fragment);
+//        scrollView = (ScrollView) findViewById(R.id.tools_scrlllview);
+//        shopAdapter = new ShopAdapter(getSupportFragmentManager());
+//        inflater = LayoutInflater.from(this);
+//        showToolsView();
+//        initPager();
+        Log.d("abc123","initGoodsCard前");
+        initGoodsCard();
+        RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recycler_view_card);
+        //GridLayoutManager layoutManager=new GridLayoutManager(this,2);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+
+//        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        adapterCard=new GoodsAdapter(myGoodsList);
+        recyclerView.setAdapter(adapterCard);
+    }
+
+    private void initGoodsCard(){
+        myGoodsList.clear();
+        for(int i=0;i<50;i++){
+            Random random=new Random();
+            int index=random.nextInt(myGoods.length);
+            myGoodsList.add(myGoods[index]);
+//            Log.d("log:","initGoodsCard");
+        }
+        Log.d("log:","initGoodsCard");
     }
 
     /**
