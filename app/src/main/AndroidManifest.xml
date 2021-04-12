@@ -5,6 +5,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 基本模块（必须）START leanCloud -->
+
+    <!-- 基本模块（必须）START leanCloud -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -38,6 +40,11 @@
         <activity android:name=".Chat.PayCheckActivity" />
         <activity android:name=".Chat.ChatDetailActivity" />
         <activity android:name=".MyCenter_mySellGoods" />
+        <activity android:name=".Deatil.GoodList">
+        </activity>
+        <activity android:name=".Deatil.GoodsDetail">
+        </activity>
+<!--        <activity android:name=".Msg.MsgDetailActivity"></activity>-->
         <activity android:name=".DividedActivity" />
         <activity android:name=".PublishOk" />
         <activity
@@ -54,7 +61,6 @@
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

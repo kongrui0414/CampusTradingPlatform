@@ -2,16 +2,12 @@ package com.example.campustradingplatform;
 
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Button;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,30 +15,41 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
-import com.alibaba.android.vlayout.layout.ColumnLayoutHelper;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
-import com.bumptech.glide.Glide;
-import com.example.campustradingplatform.Home.*;
-import com.sunfusheng.marqueeview.MarqueeView;
+import com.example.campustradingplatform.Deatil.GoodList;
+import com.example.campustradingplatform.Deatil.GoodsDetail;
+import com.example.campustradingplatform.Home.BaseAdapter;
+import com.example.campustradingplatform.Home.BaseViewHolder;
+import com.example.campustradingplatform.Home.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
+    Button search_button;
 
-    String[] ITEM_NAMES = {"天猫", "聚划算", "天猫国际", "外卖"};
+    String[] ITEM_NAMES = {"回收", "资料", "拼车", "同城"};
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment, container, false);
         recyclerView = view.findViewById(R.id.my_recycle_view);
-//        init();
+        search_button = view.findViewById(R.id.search_button);
+        search_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getActivity(), GoodList.class);
+                startActivity(intent);
+            }
+        });
         initView();
 
         return view;
@@ -54,18 +61,19 @@ public class HomeFragment extends Fragment {
         RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
         recyclerView.setRecycledViewPool(viewPool);
         viewPool.setMaxRecycledViews(0, 10);
+        DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager, true);
+        recyclerView.setAdapter(delegateAdapter);
         /**
          * 轮播Adapter
          */
-        BaseDelegeteAdapter bannerAdapter = new BaseDelegeteAdapter(getActivity(),
-                new LinearLayoutHelper(), R.layout.vlayout_banner, 1) {
+        final ArrayList<Object> arrayList = new ArrayList<>();
+        arrayList.add("https://gw.alicdn.com/imgextra/i3/20/O1CN01UTTfyr1C1CSm4hzOv_!!20" +
+                "-0" +
+                "-lubanu.jpg");
+        BaseAdapter bannerAdapter = new BaseAdapter(new LinearLayoutHelper(),
+                R.layout.vlayout_banner, arrayList) {
             @Override
             public void onBindViewHolder(@NonNull BaseViewHolder baseViewHolder, int i) {
-                ArrayList<Object> arrayList = new ArrayList<>();
-                arrayList.add(R.mipmap.ic_launcher);
-                arrayList.add("https://gw.alicdn.com/imgextra/i3/20/O1CN01UTTfyr1C1CSm4hzOv_!!20" +
-                        "-0" +
-                        "-lubanu.jpg");
                 arrayList.add("https://gw.alicdn.com/imgextra/i3/106/O1CN01etvHvW1CeaWUFfTu9_" +
                         "!!106-0" +
                         "-lubanu.jpg");
@@ -118,7 +126,7 @@ public class HomeFragment extends Fragment {
             public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.classify_text, ITEM_NAMES[position%4]);
-                holder.setImageResource(R.id.classify_image, getResourceId("classify0"+position));
+                holder.setImageResource(R.id.classify_image, getResourceId("mipmap","classify0"+position));
                 holder.getView(R.id.classify_item).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -127,30 +135,14 @@ public class HomeFragment extends Fragment {
                 });
             }
         };
-//        BaseDelegeteAdapter menuAdapter = new BaseDelegeteAdapter(getActivity(), gridLayoutHelper,
-//                R.layout.classify_item, 4) {
-//            @Override
-//            public void onBindViewHolder(@NonNull BaseViewHolder holder, final int position) {
-//                holder.setText(R.id.classify_text, ITEM_NAMES[position] + "");
-//                holder.setImageResource(R.id.classify_image, R.mipmap.ic_launcher);
-//                holder.getView(R.id.classify_text).setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Toast.makeText(getContext(), ITEM_NAMES[position],
-//                                Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//                super.onBindViewHolder(holder, position);
-//            }
-//        };
 
 
         /**
          *Goods-list
          */
         final List<String> gridlist = new ArrayList();
-        for (int i=0;i<20;i++){
-            gridlist.add("第"+i+"项");
+        for (int i=0;i<10;i++){
+            gridlist.add("商品"+i);
         }
         GridLayoutHelper gridLayoutHelper_list = new GridLayoutHelper(2);
         gridLayoutHelper_list.setPadding(30, 20, 30, 0);
@@ -161,36 +153,38 @@ public class HomeFragment extends Fragment {
             public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.goods_describe, gridlist.get(position));
-                holder.setImageResource(R.id.goods_image, R.drawable.head);
+                String imagename = "goods"+position%5;
+//                holder.setImageResource(R.id.goods_image,
+//                        getResources().getIdentifier(imagename, "drawable", requireActivity().getPackageName()));
+                holder.setImageResource(R.id.goods_image,
+                        getResourceId("mipmap", imagename));
                 holder.getView(R.id.goods_item).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(getContext(), "点击", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "点击", Toast.LENGTH_SHORT).show();
+                        Intent intent =new Intent(getActivity(), GoodsDetail.class);
+                        startActivity(intent);
                     }
                 });
             }
         };
 
-        DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager, true);
         delegateAdapter.addAdapter(bannerAdapter);
         delegateAdapter.addAdapter(menuAdapter);
         delegateAdapter.addAdapter(gridAdapter);
-
-        recyclerView.setAdapter(delegateAdapter);
     }
-
     /**
      * 根据图片名称获取图片的资源id的方法
      * @param imageName
      * @return
      */
-    public int  getResourceId(String imageName){
+    private int  getResourceId(String position,String imageName){
         Context ctx=getContext();
-        int resId = getResources().getIdentifier(imageName, "mipmap" , ctx.getPackageName());
+        int resId = getResources().getIdentifier(imageName, position , ctx.getPackageName());
         return resId;
     }
 
-    }
+}
 
 
 
