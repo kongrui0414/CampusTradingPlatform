@@ -1,5 +1,6 @@
 package com.example.campustradingplatform;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,14 +18,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.campustradingplatform.Chat.BuyerOrderManyActivity;
 import com.example.campustradingplatform.Chat.ChatBean.ChatItem;
 import com.example.campustradingplatform.Chat.ChatDetailActivity;
-import com.example.campustradingplatform.Chat.SellerOrderManyActivity;
 import com.example.campustradingplatform.Chat.Service.ChatService;
 import com.example.campustradingplatform.Chat.Service.MainChatServiceThread;
 import com.example.campustradingplatform.Chat.msgDir.ChatAdapter;
-import com.example.campustradingplatform.Goods.Goods;
 import com.example.campustradingplatform.Login.User;
 
 import java.util.ArrayList;
@@ -42,7 +40,8 @@ public class MainChatFragment extends Fragment {
     View view;
 
     //初始化user----------------------测试用--------表示本人：买家
-    User user=new User(1,true);
+//    User user=new User(1,true);
+    User user;
 
     //初始化当前界面的 会话列表
     List<ChatItem>  chatItems = new ArrayList<>();
@@ -61,7 +60,12 @@ public class MainChatFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_chat_fragment, container, false);
         this.view = view;
-        initTestBtn();
+        Activity activity = getActivity();
+        if(activity instanceof MainActivity)
+            user = ((MainActivity)activity).getUser();
+
+//        Log.d(TAG, "onCreateView: "+user);
+//        initTestBtn();
         initChatListData();
         initUI();
         return view;
@@ -84,39 +88,41 @@ public class MainChatFragment extends Fragment {
     /**
      * description: 初始化测试的按钮
      */
-    public  void initTestBtn(){
-        Button button = (Button)view.findViewById(R.id.test_btn);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(view.getContext(), BuyerOrderManyActivity.class);
-                intent.putExtra("chatItem",new ChatItem(new User(2,true)));
-                startActivity(intent);
-            }
-        });
-
-        Button button2 = (Button)view.findViewById(R.id.test_btn2);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(view.getContext(), SellerOrderManyActivity.class);
-                intent.putExtra("chatItem",new ChatItem(new User(1,false)));
-                startActivity(intent);
-            }
-        });
-
-        Button button3 = (Button)view.findViewById(R.id.test_btn3);
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //测试的商品id 如果大于 数据库的id  ----会报错
-                User buyer = new User(1,true);
-                User seller = new User(2,false);
-//                Log.d("TAG", "onClick: ");
-                ChatService.addChatItemByBidAndSidAndGid(new ChatItem(buyer,buyer,seller,new Goods(69)));
-            }
-        });
-    }
+//    public  void initTestBtn(){
+//        Button button = (Button)view.findViewById(R.id.test_btn);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(view.getContext(), BuyerOrderManyActivity.class);
+//                user.setIsBuyer(true);
+//                intent.putExtra("chatItem",new ChatItem(user));
+//                startActivity(intent);
+//            }
+//        });
+//
+//        Button button2 = (Button)view.findViewById(R.id.test_btn2);
+//        button2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(view.getContext(), SellerOrderManyActivity.class);
+//                user.setIsBuyer(false);
+//                intent.putExtra("chatItem",new ChatItem(user));
+//                startActivity(intent);
+//            }
+//        });
+//
+//        Button button3 = (Button)view.findViewById(R.id.test_btn3);
+//        button3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //测试的商品id 如果大于 数据库的id  ----会报错
+//                User buyer = new User(1,true);
+//                User seller = new User(2,false);
+////                Log.d("TAG", "onClick: ");
+//                ChatService.addChatItemByBidAndSidAndGid(new ChatItem(buyer,buyer,seller,new Goods(69)));
+//            }
+//        });
+//    }
 
 
     public void initUI(){
@@ -183,16 +189,16 @@ public class MainChatFragment extends Fragment {
         buyerChatBtn = (Button)view.findViewById(R.id.buyer_chat_btn);
         sellerChatBtn = (Button)view.findViewById(R.id.seller_chat_btn);
 
-        buyerChatBtn.setTextColor(Color.YELLOW);
-        sellerChatBtn.setTextColor(Color.WHITE);
+        buyerChatBtn.setTextColor(Color.parseColor(	"#f4a460"));
+        sellerChatBtn.setTextColor(Color.BLACK);
 
 
         buyerChatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!isBuyerScreen){
-                    buyerChatBtn.setTextColor(Color.YELLOW);
-                    sellerChatBtn.setTextColor(Color.WHITE);
+                    buyerChatBtn.setTextColor(Color.parseColor("#f4a460"));
+                    sellerChatBtn.setTextColor(Color.BLACK);
 
                     isBuyerScreen = true;
                     user.setIsBuyer(true);
@@ -208,8 +214,8 @@ public class MainChatFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(isBuyerScreen){
-                    buyerChatBtn.setTextColor(Color.WHITE);
-                    sellerChatBtn.setTextColor(Color.YELLOW);
+                    buyerChatBtn.setTextColor(Color.BLACK);
+                    sellerChatBtn.setTextColor(Color.parseColor("#f4a460"));
 
                     isBuyerScreen=false;
                     user.setIsBuyer(false);

@@ -1,12 +1,12 @@
 package com.example.campustradingplatform.Login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.campustradingplatform.MainActivity;
 import com.example.campustradingplatform.R;
@@ -23,6 +23,7 @@ public class PhoneNumLogin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PhoneNumLogin.this, MainActivity.class);
+
                 startActivity(intent);
             }
         });

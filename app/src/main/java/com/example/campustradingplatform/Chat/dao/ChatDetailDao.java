@@ -1,5 +1,7 @@
 package com.example.campustradingplatform.Chat.dao;
 
+import android.util.Log;
+
 import com.example.campustradingplatform.Chat.ChatBean.ChatDetailItem;
 import com.example.campustradingplatform.Chat.ChatBean.ChatItem;
 import com.example.campustradingplatform.Login.User;
@@ -89,5 +91,58 @@ public class ChatDetailDao {
 
 
         BaseDao.insert(sql,conn);
+    }
+
+    public static List<ChatDetailItem> getLastChatDetailByUser(ChatItem chatItem, Connection conn) {
+        String sql = "SELECT * from msg_detail_tb where recieverid = "+chatItem.getUser().getId()+" and chatid="+chatItem.getChatID()+" and isreaded=0 order by sendtime";//最近的十条记录
+
+
+        List<ChatDetailItem> chatDetailItems = new ArrayList<>();
+
+        try {
+            ResultSet rs = BaseDao.select(sql,conn);
+            while(rs.next()){
+                User seller = UserDao.getUserByUID(Integer.valueOf(rs.getString("senderid")),conn);
+                String chatID =  rs.getString("chatid");
+                String msg_con = rs.getString("msg_con");
+                String sendTime = rs.getString("sendtime");
+
+                ChatDetailItem newChatDetailItem = new ChatDetailItem(chatID,chatItem.getUser(),seller,chatItem.getUser(),msg_con,sendTime,false);
+
+                chatDetailItems.add(newChatDetailItem);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return chatDetailItems;
+    }
+
+    public static List<ChatDetailItem> getLastChatDetailByLastHisAndMe(ChatDetailItem chatDetailItem, User user, Connection conn) {
+        String sql = "SELECT * from msg_detail_tb where sendtime>'"+chatDetailItem.getSendTime()+"' and recieverid = "
+                +user.getId()+" and chatid="+chatDetailItem.getChatID()+" and isreaded=0 order by sendtime";//最近的十条记录
+
+        List<ChatDetailItem> chatDetailItems = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            rs = BaseDao.select(sql,conn);
+            while(rs.next()){
+                Log.d("TAG", "getLastChatDetailByLastHisAndMe: "+sql);
+                User friend = UserDao.getUserByUID(Integer.valueOf(rs.getString("senderid")),conn);
+                String chatID =  rs.getString("chatid");
+                String msg_con = rs.getString("msg_con");
+                String sendTime = rs.getString("sendtime");
+
+
+                ChatDetailItem newChatDetailItem = new ChatDetailItem(chatID,user,friend,user,msg_con,sendTime,false);
+
+                chatDetailItems.add(newChatDetailItem);
+
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return chatDetailItems;
     }
 }

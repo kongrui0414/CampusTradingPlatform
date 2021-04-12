@@ -55,7 +55,7 @@ public class OrderDao {
 
             //先查找订单
             String sql = "select * from order_tb where buyerid="+user.getId()+" and selled_state="+state;
-            Log.d("TAG", "getOrderByBidAndStateInGoods: "+sql);
+//            Log.d("TAG", "getOrderByBidAndStateInGoods: "+sql);
             ResultSet rs  = BaseDao.select(sql,conn);
             while(rs.next()){
 
@@ -68,7 +68,7 @@ public class OrderDao {
 
                 OrderItem orderItem = new OrderItem(rs.getString("orderid"),user,user,seller,
                         goods, opState,rs.getString("selled_state"),rs.getString("chatid"));
-                Log.d("TAG", "getOrderByBidAndStateInGoods: "+orderItem);
+//                Log.d("TAG", "getOrderByBidAndStateInGoods: "+orderItem);
                 orderItems.add(orderItem);
             }
 
@@ -87,7 +87,7 @@ public class OrderDao {
 
             //先查找订单
             String sql = "select * from order_tb where sellerid="+user.getId()+" and selled_state="+state;
-            Log.d("TAG", "getOrderByBidAndStateInGoods: "+sql);
+//            Log.d("TAG", "getOrderByBidAndStateInGoods: "+sql);
             ResultSet rs  = BaseDao.select(sql,conn);
             while(rs.next()){
 
@@ -100,7 +100,7 @@ public class OrderDao {
 
                 OrderItem orderItem = new OrderItem(rs.getString("orderid"),user,buyer,user,
                         goods, opState,rs.getString("selled_state"),rs.getString("chatid"));
-                Log.d("TAG", "getOrderByBidAndStateInGoods: "+orderItem);
+//                Log.d("TAG", "getOrderByBidAndStateInGoods: "+orderItem);
                 orderItems.add(orderItem);
             }
 

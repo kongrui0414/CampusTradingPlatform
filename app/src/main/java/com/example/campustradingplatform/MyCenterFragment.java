@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.campustradingplatform.Chat.BuyerOrderManyActivity;
+import com.example.campustradingplatform.Chat.ChatBean.ChatItem;
+import com.example.campustradingplatform.Chat.SellerOrderManyActivity;
 import com.example.campustradingplatform.Login.User;
 import com.leon.lib.settingview.LSettingItem;
 
@@ -47,6 +50,7 @@ public class MyCenterFragment extends Fragment {
         //对一个控件进行点击事件
         LSettingItem dingdan =(LSettingItem)getActivity().findViewById(R.id.item_dingdan);
         LSettingItem zaishou =(LSettingItem)getActivity().findViewById(R.id.item_zaishou);
+        LSettingItem dingdanSelled = (LSettingItem)getActivity().findViewById(R.id.item_dingdan_sell);
 //        dingdan.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
 //            @Override
 //            public void click() {
@@ -56,11 +60,22 @@ public class MyCenterFragment extends Fragment {
         dingdan.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
             @Override
             public void click() {
-//                Intent intent = new Intent(getActivity(), MyCenter_myOrders.class);
-//                intent.putExtra("user", (Serializable) user);   //将user对象传给MyCenter_myOrder
-//                startActivity(intent);
+                Intent intent = new Intent(getActivity(), BuyerOrderManyActivity.class);
+                user.setIsBuyer(true);
+                intent.putExtra("chatItem",new ChatItem(user));
+                startActivity(intent);
             }
         });
+        dingdanSelled.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
+            @Override
+            public void click() {
+                Intent intent = new Intent(getActivity(), SellerOrderManyActivity.class);
+                user.setIsBuyer(false);
+                intent.putExtra("chatItem",new ChatItem(user));
+                startActivity(intent);
+            }
+        });
+
         zaishou.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
             @Override
             public void click() {

@@ -74,7 +74,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             leon:leftIcon="@drawable/dingdan"
-            leon:leftText="我的订单"
+            leon:leftText="购买订单"
+            />
+        <com.leon.lib.settingview.LSettingItem
+            android:id="@+id/item_dingdan_sell"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            leon:leftIcon="@drawable/dingdan"
+            leon:leftText="出售订单"
             />
 
         <com.leon.lib.settingview.LSettingItem

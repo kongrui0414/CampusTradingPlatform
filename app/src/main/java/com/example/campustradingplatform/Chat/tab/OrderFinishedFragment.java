@@ -3,6 +3,7 @@ package com.example.campustradingplatform.Chat.tab;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,6 +98,8 @@ public class OrderFinishedFragment extends Fragment {
 
                 Intent intent = new Intent(view.getContext(), ChatDetailActivity.class);
                 intent.putExtra("chatItem",chatItem);
+                Log.d("TAG", "onItemClick: "+chatItem);
+
                 startActivity(intent);
             }
         });

@@ -10,7 +10,7 @@
     >
 
     <include layout="@layout/main_chat_title"/>
-    <Button
+    <!--<Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/test_btn"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/test_btn3"
         android:text="测试添加会话按钮"
-        />
+        />-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,6 +37,8 @@
             android:layout_height="wrap_content"
             android:text="买家"
             android:layout_weight="1"
+            android:background="#00000000"
+            android:textColor="@color/black"
             android:id="@+id/buyer_chat_btn"
             />
         <Button
@@ -44,6 +46,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="卖家"
+            android:background="#00000000"
+            android:textColor="@color/black"
             android:id="@+id/seller_chat_btn"
             />
     </LinearLayout>

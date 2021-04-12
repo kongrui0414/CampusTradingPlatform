@@ -3,6 +3,8 @@ package com.example.campustradingplatform.Chat;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -35,6 +37,7 @@ import com.example.campustradingplatform.UtilTools.GlobalVars;
 import com.example.campustradingplatform.UtilTools.TextUtil;
 import com.example.campustradingplatform.UtilTools.TimeUtil;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,14 +62,14 @@ public class ChatDetailActivity extends AppCompatActivity {
     private TextView gPriceText;
     private TextView gNameText;
     private String hasSelled="1";
-
+    private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_detail);
 
         chatItem = (ChatItem)getIntent().getSerializableExtra("chatItem");
-
+        user = chatItem.getUser();
 //        Log.d("TAG", "onCreate: "+chatItem);
 
         //初始化所有内容
@@ -79,7 +82,7 @@ public class ChatDetailActivity extends AppCompatActivity {
             public void run() {
                 while(true){
 
-//                    flashUI();
+                    flashUI();
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -90,6 +93,85 @@ public class ChatDetailActivity extends AppCompatActivity {
         }).start();
 
     }
+
+    /**
+     * methodName(方法名）
+     * description:刷新当前历史消息界面
+     * @param
+     * @param
+     */
+    public void flashUI(){
+        //当对方发送消息时更新当前界面
+        //持续查询服务器
+        if(chatDetailItems.size()==0){
+            ChatDetailServiceThread thread = ChatDetailService.getLastChatDetailByMeNotHistory(chatItem);
+            while(!thread.isFinished());
+            List<ChatDetailItem> newChatDetailList = thread.getChatDetailItems();
+
+            if(null!=newChatDetailList || newChatDetailList.size()!=0){
+                //发送给handler处理 UI更新
+                Message msg = new Message();
+                msg.what = GlobalVars.UPDATE_CHAT_DETAIL_HANDLER;
+//            Log.d("TAG", "flashUI: 更新的历史消息"+newChatDetailList);
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("updateChatDetail",(Serializable) newChatDetailList);
+                msg.setData(bundle);
+                handler.sendMessage(msg);
+            }
+
+        }else{
+
+            ChatDetailServiceThread thread = ChatDetailService.getLastChatDetailByLastHisAndMe(chatDetailItems.get(chatDetailItems.size()-1),chatItem.getUser());
+
+            while(!thread.isFinished());
+
+            List<ChatDetailItem> newChatDetailList = thread.getChatDetailItems();
+
+            if(null!=newChatDetailList || newChatDetailList.size()!=0){
+                //发送给handler处理 UI更新
+                Message msg = new Message();
+                msg.what = GlobalVars.UPDATE_CHAT_DETAIL_HANDLER;
+//            Log.d("TAG", "flashUI: 更新的历史消息"+newChatDetailList);
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("updateChatDetail",(Serializable) newChatDetailList);
+                msg.setData(bundle);
+                handler.sendMessage(msg);
+            }
+//        else{
+//            Log.d("TAG", "flashUI: 没有需要更新的历史消息"+newChatDetailList);
+//        }
+        }
+
+
+    }
+
+    //增加 最新的历史消息
+    public Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            super.handleMessage(msg);
+
+            switch (msg.what) {
+                case GlobalVars.UPDATE_CHAT_DETAIL_HANDLER:
+                    Bundle bundle  = msg.getData();
+                    List<ChatDetailItem> newChatDetailItems = (List<ChatDetailItem>) bundle.getSerializable("updateChatDetail");
+
+                    for(ChatDetailItem chatDetailItem:newChatDetailItems){
+                        chatDetailItems.add(chatDetailItem);
+                    }
+                    chatDetailAdapter.notifyDataSetChanged();//有新消息时，刷新ListView中的显示
+                    break;
+
+                default:
+
+                    break;
+            }
+        }
+    };
+
 
     /**
      * methodName(方法名）
@@ -109,6 +191,7 @@ public class ChatDetailActivity extends AppCompatActivity {
                 if(chatItem.getIsSelled().equals(hasSelled)){
 
                     if("".equals(chatItem.getOrderID())|| null == chatItem.getOrderID()) {
+                        Toast.makeText(ChatDetailActivity.this,"抱歉，该商品已出售！",Toast.LENGTH_SHORT).show();
                         return ;
                     }
 
@@ -121,6 +204,8 @@ public class ChatDetailActivity extends AppCompatActivity {
                         Intent intent = new Intent(ChatDetailActivity.this, BaiduMapActivity.class);
                         intent.putExtra("chatItem",chatItem);
                         startActivityForResult(intent, GlobalVars.GET_RESULT_FROM_BAIDUMAP);
+                    }else{
+                        Toast.makeText(ChatDetailActivity.this,"抱歉，交易已完成，无法继续定位！",Toast.LENGTH_SHORT).show();
                     }
                 }
                 else{ //2.没有出售直接跳转------------------------
@@ -343,7 +428,7 @@ public class ChatDetailActivity extends AppCompatActivity {
         if(chatItem.getUser().isBuyer())
             chatUserNameText.setText(chatItem.getSeller().getUserName());
         else
-            chatUserNameText.setText(chatItem.getSeller().getUserName());
+            chatUserNameText.setText(chatItem.getBuyer().getUserName());
 
         moreToolsbtn = (ImageButton) findViewById(R.id.chat_more_tools_btn);
         toolsLayout = (LinearLayout)findViewById(R.id.chat_more_tools_layout);

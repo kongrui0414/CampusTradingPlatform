@@ -4,6 +4,7 @@ import com.example.campustradingplatform.Chat.ChatBean.ChatDetailItem;
 import com.example.campustradingplatform.Chat.ChatBean.ChatItem;
 import com.example.campustradingplatform.Chat.dao.ChatDetailDao;
 import com.example.campustradingplatform.Chat.dao.DBConnection;
+import com.example.campustradingplatform.Login.User;
 import com.example.campustradingplatform.UtilTools.GlobalVars;
 
 import java.sql.Connection;
@@ -23,6 +24,7 @@ public class ChatDetailServiceThread extends Thread{
     //接收的参数
     ChatItem chatItem;
     ChatDetailItem chatDetailItem;
+    User user;
 
     //传出参数
     List<ChatDetailItem> chatDetailItems=null;
@@ -30,6 +32,12 @@ public class ChatDetailServiceThread extends Thread{
     public ChatDetailServiceThread(ChatDetailItem chatDetailItem, int mode) {
         this.chatDetailItem = chatDetailItem;
         this.mode = mode;
+    }
+
+    public ChatDetailServiceThread(ChatDetailItem chatDetailItem, User user) {
+        this.chatDetailItem = chatDetailItem;
+        this.user = user;
+        mode = GlobalVars.UPDATE_CHAT_DETAIL_THREAD;
     }
 
     public List<ChatDetailItem> getChatDetailItems() {
@@ -64,12 +72,12 @@ public class ChatDetailServiceThread extends Thread{
                 case GlobalVars.INSERT_CHAT_DETAIL_THREAD:
                     insertChatDetail(chatDetailItem,conn);
                     break;
-//                case GlobalVars.UPDATE_CHAT_DETAIL_THREAD:
-//                    getLastAddChatDetails(chatDetailItem,user,conn);
-//                    break;
-//                case GlobalVars.CHAT_DETAIL_GET_LAST_NOT_HIS:
-//                    getLastAddChatDetailsNotHis(chatItem,conn);
-//                    break;
+                case GlobalVars.UPDATE_CHAT_DETAIL_THREAD:
+                    getLastAddChatDetails(chatDetailItem,user,conn);
+                    break;
+                case GlobalVars.CHAT_DETAIL_GET_LAST_NOT_HIS:
+                    getLastAddChatDetailsNotHis(chatItem,conn);
+                    break;
             default:
                 break;
         }
@@ -90,6 +98,17 @@ public class ChatDetailServiceThread extends Thread{
                 }
             }
         }
+    }
+
+    private void getLastAddChatDetails(ChatDetailItem chatDetailItem, User user, Connection conn) {
+        List<ChatDetailItem> chatDetailItems = ChatDetailDao.getLastChatDetailByLastHisAndMe(chatDetailItem,user,conn);
+
+        this.chatDetailItems = chatDetailItems;
+    }
+
+    private void getLastAddChatDetailsNotHis(ChatItem chatItem, Connection conn) {
+        List<ChatDetailItem> chatDetailItems = ChatDetailDao.getLastChatDetailByUser(chatItem,conn);
+        this.chatDetailItems = chatDetailItems;
     }
 
     private void insertChatDetail(ChatDetailItem chatDetailItem, Connection conn) {

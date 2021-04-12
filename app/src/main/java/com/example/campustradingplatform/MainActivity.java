@@ -27,6 +27,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private User user;          //用户类，用于储存登录的用户信息
 
+    public User getUser() {
+        return user;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         navigation = this.findViewById(R.id.navigation);
         initFragments();
-
 
 
     }
