@@ -1,6 +1,7 @@
 package com.example.campustradingplatform.Deatil;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,9 @@ public class GoodsDetail extends AppCompatActivity {
 
     private void initView() {
         creatChatBtn  = (Button)findViewById(R.id.shopcar);
+        if(chatItem.getGoods().getSellerId() == chatItem.getUser().getId()){
+            creatChatBtn.setTextColor(Color.GRAY);
+        }
     }
 
     private void initListener() {
@@ -38,6 +42,7 @@ public class GoodsDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //创建会话跳转
+                if(chatItem.getGoods().getSellerId() == chatItem.getUser().getId()) return;
 
 //                Log.d("TAG", "onClick: ");
                 MainChatServiceThread thread =  ChatService.addChatItemByBidAndSidAndGid(chatItem);
