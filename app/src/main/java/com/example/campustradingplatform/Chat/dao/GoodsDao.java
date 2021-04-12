@@ -6,7 +6,9 @@ import com.example.campustradingplatform.UtilTools.TimeUtil;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author: 竹林
@@ -65,5 +67,31 @@ public class GoodsDao {
         String sql = "insert into goods value("+sellerid+",null,'"+goodsName+"','"+description+"',"+
                 originalPrice+","+presentPrice+",'"+oldorNew+"','"+launchTime+"')";
         return BaseDao.insert(sql,conn);
+    }
+
+    public static List<Goods> getGoodsList(Connection conn) {
+        String sql="SELECT * FROM goods";
+        List<Goods> goodsList = new ArrayList<>();
+        try {
+            ResultSet rs = BaseDao.select(sql,conn);
+            while(rs.next()){
+
+                int sellerid = Integer.valueOf(rs.getString("sellerid"));
+                int goodsId = Integer.valueOf(rs.getString("goodsId"));
+                String goodsName = rs.getString("goodsName");
+                String description =rs.getString("description");
+                float originalPrice =Float.valueOf(rs.getString("originalPrice"));
+                float presentPrice =Float.valueOf(rs.getString("presentPrice"));
+                String oldorNew = rs.getString("oldorNew");
+                Date launchTime = TimeUtil.strToDate(rs.getString("launchTime"));
+
+
+                Goods goods = new Goods(sellerid,goodsId,goodsName,description,originalPrice,presentPrice,oldorNew,launchTime);
+                goodsList.add(goods);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return goodsList;
     }
 }

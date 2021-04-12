@@ -1,6 +1,7 @@
 package com.example.campustradingplatform;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,19 +10,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
+import com.example.campustradingplatform.Chat.ChatBean.ChatItem;
 import com.example.campustradingplatform.Deatil.GoodList;
 import com.example.campustradingplatform.Deatil.GoodsDetail;
+import com.example.campustradingplatform.Goods.Goods;
+import com.example.campustradingplatform.Goods.GoodsService;
+import com.example.campustradingplatform.Goods.GoodsThread;
 import com.example.campustradingplatform.Home.BaseAdapter;
 import com.example.campustradingplatform.Home.BaseViewHolder;
 import com.example.campustradingplatform.Home.GlideImageLoader;
+import com.example.campustradingplatform.Login.User;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -36,11 +44,17 @@ public class HomeFragment extends Fragment {
     Button search_button;
 
     String[] ITEM_NAMES = {"回收", "资料", "拼车", "同城"};
+    private User user;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment, container, false);
+
+        Activity activity = getActivity();
+        if(activity instanceof MainActivity)
+            user = ((MainActivity)activity).getUser();
+
         recyclerView = view.findViewById(R.id.my_recycle_view);
         search_button = view.findViewById(R.id.search_button);
         search_button.setOnClickListener(new View.OnClickListener() {
@@ -140,10 +154,14 @@ public class HomeFragment extends Fragment {
         /**
          *Goods-list
          */
-        final List<String> gridlist = new ArrayList();
-        for (int i=0;i<10;i++){
-            gridlist.add("商品"+i);
-        }
+//        final List<Goods> gridlist = new ArrayList();
+////        for (int i=0;i<10;i++){
+////            gridlist.add("商品"+i);
+////        }
+        GoodsThread thread = GoodsService.getGoodsList();
+        while(!thread.isFinished());
+        final List<Goods> gridlist = thread.getGoodsList();
+
         GridLayoutHelper gridLayoutHelper_list = new GridLayoutHelper(2);
         gridLayoutHelper_list.setPadding(30, 20, 30, 0);
         gridLayoutHelper_list.setVGap(20);//垂直间距
@@ -152,7 +170,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                holder.setText(R.id.goods_describe, gridlist.get(position));
+                Goods goods = gridlist.get(position);
+                holder.setText(R.id.goods_describe, goods.getGoodsName());
+                holder.setText(R.id.goods_price, String.valueOf(goods.getPresentPrice()));
+
                 String imagename = "goods"+position%5;
 //                holder.setImageResource(R.id.goods_image,
 //                        getResources().getIdentifier(imagename, "drawable", requireActivity().getPackageName()));
@@ -161,8 +182,15 @@ public class HomeFragment extends Fragment {
                 holder.getView(R.id.goods_item).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+                        User buyer = new User(user.getId(),true);
+                        User seller = new User(goods.getSellerId(),false);
+                        ChatItem chatItem = new ChatItem(user,user,seller,goods);
 //                        Toast.makeText(getContext(), "点击", Toast.LENGTH_SHORT).show();
+                        //先查询 --是否有本号chatItem ,有直接跳转
+                        //没有，根据当前user,seller,goodsid 创建 chatItem
                         Intent intent =new Intent(getActivity(), GoodsDetail.class);
+                        intent.putExtra("chatItem",chatItem);
                         startActivity(intent);
                     }
                 });

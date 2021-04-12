@@ -1,14 +1,14 @@
 package com.example.campustradingplatform.Deatil;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
@@ -56,6 +56,8 @@ public class GoodList extends AppCompatActivity {
             public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.goods_describe, gridlist.get(position));
+                holder.setText(R.id.goods_describe, gridlist.get(position));
+
                 String imagename = "goods0";
                 holder.setImageResource(R.id.goods_image,
                         getResourceId("mipmap", imagename));

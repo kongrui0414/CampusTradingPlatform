@@ -85,6 +85,7 @@ dependencies {
 
     //卡片式布局
     implementation "androidx.cardview:cardview:1.0.0"
-
+    //时间选择
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
 
 }

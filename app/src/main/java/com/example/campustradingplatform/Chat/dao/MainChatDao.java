@@ -222,4 +222,54 @@ public class MainChatDao {
         //修改当前chatItem的内容
         chatItem.setChatID(String.valueOf(chatid));
     }
+
+    public static ChatItem getChatItemByBSGid(ChatItem chatItem, Connection conn) {
+        String sql = "SELECT * FROM main_chat_tb where buyerid="+chatItem.getBuyer().getId()+
+                " and sellerid="+chatItem.getSeller().getId()+" and gid="+chatItem.getGoods().getGoodsId();
+
+        try {
+            ResultSet rs = BaseDao.select(sql,conn);
+            if(rs.next()){
+                //1. 获取 每个会话 的 -->最新消息----------------可能会没有/也可能会有
+                ChatDetailItem chatDetailItem = ChatDetailDao.getLastChatDetailByChatID(rs.getString("chatid"),conn);
+
+                //2.获取 每个会话 的  -->商品信息
+                // 2.1 可能在 已经出售的商品中 获取
+                //2.2 可能是 正在出售的商品
+                Goods goods=null;
+                if(rs.getString("isSelled").equals("0")){
+                    goods= GoodsDao.seletGoodsByGid(rs.getString("gid"),conn);
+//                Log.d("TAG", "getMainChatDaoByUID: 在Goods中查找");
+                }else{
+//                Log.d("TAG", "getMainChatDaoByUID: 在buyedGoods中查找");
+                    goods = BuyedGoodsDao.seletGoodsByGid(rs.getString("gid"),conn);
+                }
+
+
+                String chatid = rs.getString("chatid");
+
+                User user = UserDao.getUserByUID(chatItem.getUser().getId(),conn);
+                user.setIsBuyer(true);
+
+                User buyer = UserDao.getUserByUID(Integer.valueOf(rs.getString("buyerid")),conn);
+                buyer.setIsBuyer(true);
+
+                User seller = UserDao.getUserByUID(Integer.valueOf(rs.getString("sellerid")),conn);
+                seller.setIsBuyer(false);
+
+                String lastMsg = chatDetailItem.getMsg_con();  //最新的消息
+                String msgSendedTime = chatDetailItem.getSendTime(); //消息被发送的时间
+                String tranAddr = rs.getString("trans_address");  //定好的交易地点
+                String isSelled = rs.getString("isSelled");  //本次商品是否已经被出售
+                String orderid = rs.getString("orderid");    //本次会话是否产生了订单
+
+
+                return  new ChatItem(chatid,user,buyer,seller,goods, lastMsg,msgSendedTime,tranAddr,isSelled,orderid);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -68,7 +68,10 @@ public class GlobalVars {
     //用于地图插入
     public static final int INSERT_LOC_BY_BSID_THREAD = 28;
 
-    //---------36start
+
+    //用于商品显示
+    public static final int GET_GOODS_LIST_THREAD = 36;
+    //---------37start
 
     //用于判断订单状态  --- 界面
     public static final String WAIT_DEAL_ORDER = "0";
@@ -100,4 +103,5 @@ public class GlobalVars {
 
 
     public static final String IF_BUYER_CAN_CHECK_MAP = "9";
+
 }

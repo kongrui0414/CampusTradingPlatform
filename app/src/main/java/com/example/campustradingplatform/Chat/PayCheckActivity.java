@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,11 +19,18 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.listener.OnTimeSelectListener;
+import com.bigkoo.pickerview.view.TimePickerView;
 import com.example.campustradingplatform.Chat.ChatBean.ChatItem;
 import com.example.campustradingplatform.Chat.Service.LocaService;
 import com.example.campustradingplatform.Chat.Service.LocaServiceThread;
 import com.example.campustradingplatform.MainActivity;
 import com.example.campustradingplatform.R;
+import com.example.campustradingplatform.UtilTools.TimeUtil;
+
+import java.io.Serializable;
+import java.util.Date;
 
 public class PayCheckActivity extends AppCompatActivity {
     ChatItem chatItem;
@@ -36,6 +44,9 @@ public class PayCheckActivity extends AppCompatActivity {
     private Button cancelBtn;
     private Button comfirmBtn;
     private LocaServiceThread comfirmThread;
+    private Button addtimeBtn;
+    private TextView dateStrText;
+    String dateStrEmpty="暂时没有选择日期";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +75,50 @@ public class PayCheckActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                comfirmThread = LocaService.comfirmOrder(chatItem);
-                while(!comfirmThread.isFinished());
+                try {
 
-                Intent intent = new Intent(PayCheckActivity.this, MainActivity.class);
-                startActivity(intent);
+                    if(dateStrEmpty.equals(dateStrText.getText())){
+                        Toast.makeText(PayCheckActivity.this,"请先选择交易日期",Toast.LENGTH_SHORT).show();
+                        return ;
+                    }else if(!TimeUtil.compare(TimeUtil.getCurrentTime().toString(),dateStrText.getText().toString())){
+                        Toast.makeText(PayCheckActivity.this,"请先选择未来日期",Toast.LENGTH_SHORT).show();
+                        return ;
+                    }
+                    chatItem.setTransDate(dateStrText.getText().toString());
+                    comfirmThread = LocaService.comfirmOrder(chatItem);
+                    while(!comfirmThread.isFinished());
+
+                    Intent intent = new Intent(PayCheckActivity.this, MainActivity.class);
+                    intent.putExtra("user2", (Serializable) chatItem.getUser());
+                    startActivity(intent);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
+
+        addtimeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //时间选择器
+                TimePickerView pvTime = new TimePickerBuilder(PayCheckActivity.this, new OnTimeSelectListener() {
+                    @Override
+                    public void onTimeSelect(Date date, View v) {
+                        //2018/03/26 18:20
+                        String dateStr= TimeUtil.getOutputFormat().format(date);
+                        dateStrText.setText(dateStr);
+                    }
+                }).setType(new boolean[]{true, true, true, true, true, false}).build();
+                pvTime.show();
+
+            }
+        });
+
+
+
+
+
     }
     /**
      * description: 初始化map，将选定的地点显示在地图上
@@ -103,6 +151,8 @@ public class PayCheckActivity extends AppCompatActivity {
 
         cancelBtn = (Button)findViewById(R.id.cancel_btn);
         comfirmBtn = (Button)findViewById(R.id.submit_btn);
+        addtimeBtn = (Button)findViewById(R.id.add_time);
+        dateStrText = (TextView) findViewById(R.id.date_str_text);
     }
 
     /**

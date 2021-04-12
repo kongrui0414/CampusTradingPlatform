@@ -381,7 +381,14 @@ public class ChatDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                Log.d("TAG", "onClick: 确认购买buyBtn");
                 //跳转结算界面
-                if(chatItem.getIsSelled().equals("1")) return ;
+                if(chatItem.getIsSelled().equals("1")) {
+                    Toast.makeText(ChatDetailActivity.this,"该商品正在交易或已完成交易",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
+                else if(null != chatItem.getOrderID() && !"".equals(chatItem.getOrderID()) && !"null".equals(chatItem.getOrderID())){
+                    Toast.makeText(ChatDetailActivity.this,"请等待卖家处理",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 LocaServiceThread thread = LocaService.getTransAddr(chatItem);
                 while(!thread.isFinished());
                 if(!"-1".equals(thread.getTransAddr()) && !"".equals(thread.getTransAddr())&&!"null".equals(thread.getTransAddr())){
@@ -448,6 +455,11 @@ public class ChatDetailActivity extends AppCompatActivity {
         buyBtn = (Button)findViewById(R.id.comfirm_buy_btn);
         if(chatItem.getIsSelled().equals("1")){
             buyBtn.setText("已出售");
+            Drawable drawable = getResources().getDrawable(R.color.yellow_bright);
+            buyBtn.setBackground(drawable);
+        }
+        else if(null != chatItem.getOrderID() && !"".equals(chatItem.getOrderID()) && !"null".equals(chatItem.getOrderID())){
+            buyBtn.setText("已购买");
             Drawable drawable = getResources().getDrawable(R.color.yellow_bright);
             buyBtn.setBackground(drawable);
         }

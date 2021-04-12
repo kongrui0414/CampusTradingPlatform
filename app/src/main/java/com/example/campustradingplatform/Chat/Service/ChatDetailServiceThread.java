@@ -53,6 +53,8 @@ public class ChatDetailServiceThread extends Thread{
         this.mode = mode;
     }
 
+
+
     @Override
     public void run() {
         super.run();

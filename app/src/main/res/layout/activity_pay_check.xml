@@ -26,17 +26,30 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/buyer_name_text"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
 
-                android:layout_marginRight="12dp"
-                android:text="Z1"
-                android:textSize="@dimen/dp24" />
+                <TextView
+                    android:id="@+id/buyer_name_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="12dp"
 
+                    android:layout_marginRight="12dp"
+                    android:text="Z1"
+                    android:textSize="@dimen/dp24" />
+                <Button
+                    android:id="@+id/add_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp6"
+                    android:text="修改交易时间"
+                    />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,13 +66,16 @@
                     android:textSize="@dimen/dp15" />
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/date_str_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dp12"
                     android:layout_weight="1"
-                    android:text="2021-04-01 16:42:31" />
+                    android:text="暂时没有选择日期"
+                    />
+
             </LinearLayout>
+
 
         </LinearLayout>
 

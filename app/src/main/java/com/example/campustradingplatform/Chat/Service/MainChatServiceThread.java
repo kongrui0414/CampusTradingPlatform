@@ -107,11 +107,13 @@ public class MainChatServiceThread extends Thread{
     }
 
     private void buyerAddNewChat(ChatItem chatItem, Connection conn) {
-        String chatid = MainChatDao.getChatIDByBSGid(chatItem,conn);
-        if(null == chatid || "".equals(chatid)){
+        ChatItem myChatItem = MainChatDao.getChatItemByBSGid(chatItem,conn);
+//        String chatid = MainChatDao.getChatIDByBSGid(chatItem,conn);
+        if(null == myChatItem){
             MainChatDao.buyerAddNewChat(chatItem,conn);
+            this.chatItem = MainChatDao.getChatItemByBSGid(chatItem,conn);
         }else{
-            chatItem.setChatID(chatid);
+            this.chatItem = myChatItem;
         }
     }
 

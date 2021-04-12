@@ -95,7 +95,7 @@ public class MainChatFragment extends Fragment {
 //            public void onClick(View v) {
 //                Intent intent = new Intent(view.getContext(), BuyerOrderManyActivity.class);
 //                user.setIsBuyer(true);
-//                intent.putExtra("chatItem",new ChatItem(user));
+//                .putExtra("chatItem",new ChatItem(user));intent
 //                startActivity(intent);
 //            }
 //        });

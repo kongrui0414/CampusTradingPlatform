@@ -1,7 +1,5 @@
 package com.example.campustradingplatform.Chat.dao;
 
-import android.util.Log;
-
 import com.example.campustradingplatform.Chat.ChatBean.ChatItem;
 
 import java.sql.Connection;
@@ -125,7 +123,7 @@ public class LocaDao {
         try {
             ResultSet rs = BaseDao.select(sql,conn);
             if (rs.next()){
-                Log.d("TAG", "getTmpTransAddrByChatID: "+ rs.getString("tmp_trans_addr"));
+//                Log.d("TAG", "getTmpTransAddrByChatID: "+ rs.getString("tmp_trans_addr"));
 //                Log.d("TAG", "flashUI: "+thread.getTransAddr());
                 return rs.getString("tmp_trans_addr");
             }

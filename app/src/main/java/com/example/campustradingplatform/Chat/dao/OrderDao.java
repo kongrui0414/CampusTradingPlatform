@@ -1,7 +1,5 @@
 package com.example.campustradingplatform.Chat.dao;
 
-import android.util.Log;
-
 import com.example.campustradingplatform.Chat.ChatBean.ChatItem;
 import com.example.campustradingplatform.Chat.ChatBean.OrderItem;
 import com.example.campustradingplatform.Goods.Goods;
@@ -40,7 +38,7 @@ public class OrderDao {
 
         sql  = "insert into order_tb value(null,"+chatItem.getBuyer().getId()+
                 ","+chatItem.getSeller().getId()+","+chatItem.getGoods().getGoodsId()
-                +",now(),'"+chatItem.getTranAddr()+"',now(),0,"+chatItem.getChatID()+")";
+                +",now(),'"+chatItem.getTranAddr()+"','"+chatItem.getTransDate()+"',0,"+chatItem.getChatID()+")";
 
 
         return BaseDao.insert(sql,conn);

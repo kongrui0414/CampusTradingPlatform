@@ -20,10 +20,19 @@ public class ChatItem implements Serializable {
     private String lastMsgSendTime;
     private String tranAddr;
     private String isSelled;
-    private String orderID;
+    private String orderID="";
+    private String transDate;
+
+    public void setTransDate(String transDate) {
+        this.transDate = transDate;
+    }
+
+    public String getTransDate() {
+        return transDate;
+    }
 
     public ChatItem(String chatID, User user, User buyer, User seller, Goods goods,
-                    String lastMsg, String lastMsgSendTime, String tranAddr,String isSelled, String orderID) {
+                    String lastMsg, String lastMsgSendTime, String tranAddr, String isSelled, String orderID) {
         this.chatID = chatID;
         this.user = user;
         this.buyer = buyer;
