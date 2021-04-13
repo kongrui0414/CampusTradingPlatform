@@ -71,7 +71,9 @@ public class GlobalVars {
 
     //用于商品显示
     public static final int GET_GOODS_LIST_THREAD = 36;
-    //---------37start
+    public static final int GET_GOODS_OLDPRICE = 37;
+    public static final int GET_GOODS_NOWPRICE = 38;
+    //---------39start
 
     //用于判断订单状态  --- 界面
     public static final String WAIT_DEAL_ORDER = "0";

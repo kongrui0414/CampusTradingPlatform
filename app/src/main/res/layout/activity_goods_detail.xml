@@ -4,7 +4,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#FFCC00"
+        android:gravity="center"
+        android:text="商品详情"
+        android:textColor="#FF3300"
+        android:textSize="16sp"
+        />
     <ImageView
+        android:layout_marginTop="48dp"
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="250dp"
@@ -12,21 +22,91 @@
     />
 
     <TextView
+            android:paddingTop="10dp"
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/image"
+            android:layout_centerInParent="true"
             android:text="初音未来fufu玩偶"
-            android:textSize="22sp" />
+            android:textColor="#000"
+            android:textSize="20sp" />
 
     <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/title"
-            android:text="￥399"
-            android:textColor="#F00"
-            android:textSize="22sp" />
+        android:paddingTop="10dp"
+        android:id="@+id/oldprice"
+        android:layout_marginLeft="12dp"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="-3dp"
+        android:text="￥399"
+        android:textColor="@color/gray"
+        android:textSize="18sp" />
+    <TextView
+        android:paddingTop="10dp"
+        android:id="@+id/nowprice"
+        android:layout_marginLeft="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/oldprice"
+        android:layout_marginTop="-3dp"
+        android:text="￥399"
+        android:textColor="#F00"
+        android:textSize="20sp" />
+    <TextView
+        android:paddingTop="10dp"
+        android:id="@+id/seller_text"
+        android:layout_below="@id/title"
+        android:layout_marginRight="12dp"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="卖家id"
+        android:textColor="#000"
+        android:textSize="18sp"/>
+    <TextView
+        android:paddingTop="10dp"
+        android:id="@+id/OldorNew_text"
+        android:layout_below="@+id/nowprice"
+        android:layout_marginLeft="12dp"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="新旧程度"
+        android:textColor="#000"
+        android:textSize="18sp"/>
+    <TextView
+        android:paddingTop="10dp"
+        android:id="@+id/lauchtime_text"
+        android:layout_below="@+id/OldorNew_text"
+        android:layout_marginLeft="12dp"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:text="lauchtime"
+        android:textSize="18sp"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:paddingTop="10dp"
+        android:text="description"
+        android:id="@+id/description_text"
+        android:layout_below="@+id/lauchtime_text"
+        android:layout_marginLeft="12dp"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="#000"
+        />
+    <ImageView
+        android:id="@+id/text_pic"
+        android:layout_below="@+id/description_text"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:src="@drawable/textpic"/>
+
+
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,18 +115,15 @@
     >
         <Button
                 android:id="@+id/shopcar"
+                android:background="#FFCC00"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="50dp"
                 android:text="联系卖家"
+                android:textSize="16sp"
                 android:onClick="shopcar"
         />
-        <Button
-                android:id="@+id/join"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="50dp"
-                android:text="购买" />
+
 
     </LinearLayout>
 </RelativeLayout>

@@ -13,4 +13,9 @@ public class GoodsService {
         thread.start();
         return thread;
     }
+    public static GoodsThread getGoodsOldPrice(Goods goods){
+        GoodsThread thread = new GoodsThread(GlobalVars.GET_GOODS_OLDPRICE);
+        thread.start();
+        return thread;
+    }
 }

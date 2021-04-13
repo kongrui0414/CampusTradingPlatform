@@ -94,4 +94,6 @@ public class GoodsDao {
         }
         return goodsList;
     }
+
+
 }
