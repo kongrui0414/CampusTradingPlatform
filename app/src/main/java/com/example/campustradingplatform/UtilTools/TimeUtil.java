@@ -182,5 +182,11 @@ public class TimeUtil {
 			return false;
 		*/
     }
+    public static boolean compare(Date a,Date b){
+        if(a.before(b))
+            return true;
+        else
+            return false;
+    }
 
 }

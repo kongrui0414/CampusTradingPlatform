@@ -39,12 +39,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import scut.carson_ho.diy_view.SuperEditText;
+
 public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     Button search_button;
 
     String[] ITEM_NAMES = {"回收", "资料", "拼车", "同城"};
     private User user;
+    private SuperEditText searchText;
 
     @Nullable
     @Override
@@ -57,10 +60,14 @@ public class HomeFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.my_recycle_view);
         search_button = view.findViewById(R.id.search_button);
+        searchText = (SuperEditText)view.findViewById(R.id.search_bar);
         search_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(getActivity(), GoodList.class);
+                intent.putExtra("search_words",searchText.getText().toString());
+                if(getActivity() instanceof MainActivity)
+                    intent.putExtra("user",((MainActivity)getActivity()).getUser());
                 startActivity(intent);
             }
         });
