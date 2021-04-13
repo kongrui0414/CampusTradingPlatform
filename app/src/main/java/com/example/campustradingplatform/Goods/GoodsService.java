@@ -13,8 +13,10 @@ public class GoodsService {
         thread.start();
         return thread;
     }
-    public static GoodsThread getGoodsOldPrice(Goods goods){
-        GoodsThread thread = new GoodsThread(GlobalVars.GET_GOODS_OLDPRICE);
+
+
+    public static GoodsThread getGoodsListByKeyWord(String searchWords) {
+        GoodsThread thread = new GoodsThread(searchWords,GlobalVars.GET_GOODS_LIST_BY_KEY_THREAD);
         thread.start();
         return thread;
     }

@@ -1,5 +1,7 @@
 package com.example.campustradingplatform.Chat.dao;
 
+import android.util.Log;
+
 import com.example.campustradingplatform.Goods.Goods;
 import com.example.campustradingplatform.UtilTools.TimeUtil;
 
@@ -95,5 +97,30 @@ public class GoodsDao {
         return goodsList;
     }
 
+    public static List<Goods> getGoodsListByKeyWords(String keyWords, Connection conn) {
+        String sql="SELECT * FROM goods where goodsName like '%"+keyWords+"%' order by presentPrice, launchTime desc";
+        Log.d(TAG, "getGoodsListByKeyWords: "+sql);
+        List<Goods> goodsList = new ArrayList<>();
+        try {
+            ResultSet rs = BaseDao.select(sql,conn);
+            while(rs.next()){
 
+                int sellerid = Integer.valueOf(rs.getString("sellerid"));
+                int goodsId = Integer.valueOf(rs.getString("goodsId"));
+                String goodsName = rs.getString("goodsName");
+                String description =rs.getString("description");
+                float originalPrice =Float.valueOf(rs.getString("originalPrice"));
+                float presentPrice =Float.valueOf(rs.getString("presentPrice"));
+                String oldorNew = rs.getString("oldorNew");
+                Date launchTime = TimeUtil.strToDate(rs.getString("launchTime"));
+
+
+                Goods goods = new Goods(sellerid,goodsId,goodsName,description,originalPrice,presentPrice,oldorNew,launchTime);
+                goodsList.add(goods);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return goodsList;
+    }
 }

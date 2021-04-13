@@ -17,8 +17,12 @@ public class GoodsThread extends Thread{
     int mode =-1;
     boolean isFinished = false;
     List<Goods> goodsList = new ArrayList<>();
-    float oldprice;
-    Goods goods;
+    String keyWords="";
+
+    public GoodsThread(String searchWords, int mode) {
+        this.keyWords = searchWords;
+        this.mode = mode;
+    }
 
     public List<Goods> getGoodsList() {
         return goodsList;
@@ -48,8 +52,9 @@ public class GoodsThread extends Thread{
             case GlobalVars.GET_GOODS_LIST_THREAD:
                 getGoodsListDao(conn);
                 break;
-            case GlobalVars.GET_GOODS_OLDPRICE:
-//                GoodsDao.seletGoodsByGid(goods.getGoodsId(),conn);//数据类型不对
+            case GlobalVars.GET_GOODS_LIST_BY_KEY_THREAD:
+                getGoodsListByKeyWords(keyWords,conn);
+
                 break;
             default:
                 break;
@@ -71,6 +76,10 @@ public class GoodsThread extends Thread{
                 }
             }
         }
+    }
+
+    private void getGoodsListByKeyWords(String keyWords, Connection conn) {
+        goodsList = GoodsDao.getGoodsListByKeyWords(keyWords,conn);
     }
 
     private void getGoodsListDao(Connection conn) {
