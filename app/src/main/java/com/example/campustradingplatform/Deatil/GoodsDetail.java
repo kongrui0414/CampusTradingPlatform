@@ -113,11 +113,11 @@ public class GoodsDetail extends AppCompatActivity {
 
     }
 
-    private void getGoodsPrice(){
+/*    private void getGoodsPrice(){
         GoodsThread thread= GoodsService.getGoodsOldPrice(chatItem.getGoods());
         while(!thread.isFinished());
         Log.d("tag","oldprice:"+oldprice);
-    }
+    }*/
 
 
 }
