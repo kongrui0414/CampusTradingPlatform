@@ -2,6 +2,7 @@ package com.example.campustradingplatform.Goods;
 
 import com.example.campustradingplatform.Chat.dao.DBConnection;
 import com.example.campustradingplatform.Chat.dao.GoodsDao;
+import com.example.campustradingplatform.Login.User;
 import com.example.campustradingplatform.UtilTools.GlobalVars;
 
 import java.sql.Connection;
@@ -14,6 +15,7 @@ import java.util.List;
  * @date: 2021/4/12
  */
 public class GoodsThread extends Thread{
+    private  User user;
     int mode =-1;
     boolean isFinished = false;
     List<Goods> goodsList = new ArrayList<>();
@@ -28,7 +30,8 @@ public class GoodsThread extends Thread{
         return goodsList;
     }
 
-    public GoodsThread(int mode){
+    public GoodsThread(User user, int mode){
+        this.user = user;
         this.mode = mode;
     }
 
@@ -50,7 +53,7 @@ public class GoodsThread extends Thread{
         //执行所有dao操作
         switch (mode){
             case GlobalVars.GET_GOODS_LIST_THREAD:
-                getGoodsListDao(conn);
+                getGoodsListDao(user,conn);
                 break;
             case GlobalVars.GET_GOODS_LIST_BY_KEY_THREAD:
                 getGoodsListByKeyWords(keyWords,conn);
@@ -82,8 +85,8 @@ public class GoodsThread extends Thread{
         goodsList = GoodsDao.getGoodsListByKeyWords(keyWords,conn);
     }
 
-    private void getGoodsListDao(Connection conn) {
-        goodsList = GoodsDao.getGoodsList(conn);
+    private void getGoodsListDao(User user,Connection conn) {
+        goodsList = GoodsDao.getGoodsList(user,conn);
     }
 
 }

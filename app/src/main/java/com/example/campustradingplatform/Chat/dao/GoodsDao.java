@@ -3,6 +3,7 @@ package com.example.campustradingplatform.Chat.dao;
 import android.util.Log;
 
 import com.example.campustradingplatform.Goods.Goods;
+import com.example.campustradingplatform.Login.User;
 import com.example.campustradingplatform.UtilTools.TimeUtil;
 
 import java.sql.Connection;
@@ -67,12 +68,12 @@ public class GoodsDao {
         Date launchTime = goods.getLaunchTime();
 
         String sql = "insert into goods value("+sellerid+",null,'"+goodsName+"','"+description+"',"+
-                originalPrice+","+presentPrice+",'"+oldorNew+"','"+launchTime+"')";
+                originalPrice+","+presentPrice+",'"+oldorNew+"','"+TimeUtil.dateToString(launchTime)+"')";
         return BaseDao.insert(sql,conn);
     }
 
-    public static List<Goods> getGoodsList(Connection conn) {
-        String sql="SELECT * FROM goods";
+    public static List<Goods> getGoodsList(User user, Connection conn) {
+        String sql="SELECT * FROM goods where sellerid !="+user.getId();
         List<Goods> goodsList = new ArrayList<>();
         try {
             ResultSet rs = BaseDao.select(sql,conn);

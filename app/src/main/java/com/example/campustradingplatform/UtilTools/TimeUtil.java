@@ -16,7 +16,6 @@ public class TimeUtil {
         TimeZone time = TimeZone.getTimeZone("Etc/GMT-8");  //转换为中国时区
         TimeZone.setDefault(time);
 
-
         Date d = new Date();
         System.out.println(d);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
@@ -93,6 +92,12 @@ public class TimeUtil {
     public static String getCurrentTimeString(){
         return getOutputFormat().format(getCurrentDate());
     }
+
+    public static String dateToString(Date date){
+        return getOutputFormat().format(date);
+    }
+
+
 
     public static SimpleDateFormat getOutputFormat(){
 //        TimeZone timeZoneSH = TimeZone.getTimeZone("Asia/Shanghai");

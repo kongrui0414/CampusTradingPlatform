@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.example.campustradingplatform.Chat.BuyerOrderManyActivity;
 import com.example.campustradingplatform.Chat.ChatBean.ChatItem;
 import com.example.campustradingplatform.Chat.SellerOrderManyActivity;
+import com.example.campustradingplatform.Login.Login;
 import com.example.campustradingplatform.Login.User;
 import com.leon.lib.settingview.LSettingItem;
 
@@ -32,6 +34,7 @@ public class MyCenterFragment extends Fragment {
     String sqlUserName = "root";
     //连接数据库的密码
     String sqlPsw = "ABC123!!";
+    private LSettingItem logOutBtn;
 
     @Nullable
     @Override
@@ -57,6 +60,15 @@ public class MyCenterFragment extends Fragment {
 //                Toast.makeText(getActivity(),"暂时没有订单",Toast.LENGTH_SHORT).show();
 //            }
 //        });
+        logOutBtn = (LSettingItem)getActivity().findViewById(R.id.back_login);
+        logOutBtn.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
+            @Override
+            public void click() {
+                Intent intent  = new Intent(getActivity(), Login.class);
+                startActivity(intent);
+            }
+        });
+
         dingdan.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
             @Override
             public void click() {

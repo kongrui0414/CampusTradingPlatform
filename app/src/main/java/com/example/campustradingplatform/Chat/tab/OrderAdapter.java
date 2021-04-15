@@ -57,7 +57,7 @@ public class OrderAdapter extends ArrayAdapter<OrderItem> {
         gName =(TextView)view.findViewById(R.id.g_name_order);
         gPrice = (TextView)view.findViewById(R.id.g_price_order);
 
-
+//        Log.d("TAG", "getView: "+orderItem);
         if(orderItem.getGoods()!=null){
             gName.setText(orderItem.getGoods().getGoodsName());
             gPrice.setText(String.valueOf(orderItem.getGoods().getPresentPrice()));
@@ -260,6 +260,7 @@ public class OrderAdapter extends ArrayAdapter<OrderItem> {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    button.setText("取消订单");
                     //刷新界面----------------------------------------------
                     OrderService.deliverOrder(orderItem);
                     Log.d("TAG", "addListenerToBtn: 发货");

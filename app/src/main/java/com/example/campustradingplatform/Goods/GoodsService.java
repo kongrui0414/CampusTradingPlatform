@@ -1,5 +1,6 @@
 package com.example.campustradingplatform.Goods;
 
+import com.example.campustradingplatform.Login.User;
 import com.example.campustradingplatform.UtilTools.GlobalVars;
 
 /**
@@ -8,8 +9,8 @@ import com.example.campustradingplatform.UtilTools.GlobalVars;
  */
 public class GoodsService {
 
-    public static GoodsThread getGoodsList() {
-        GoodsThread thread = new GoodsThread(GlobalVars.GET_GOODS_LIST_THREAD);
+    public static GoodsThread getGoodsList(User user) {
+        GoodsThread thread = new GoodsThread(user,GlobalVars.GET_GOODS_LIST_THREAD);
         thread.start();
         return thread;
     }

@@ -92,12 +92,7 @@
             leon:leftIcon="@drawable/zaishou"
             leon:leftText="在售" />
 
-        <com.leon.lib.settingview.LSettingItem
-            android:id="@+id/item_daifu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            leon:leftIcon="@drawable/daifu"
-            leon:leftText="待付款" />
+
 
         <com.leon.lib.settingview.LSettingItem
             android:layout_width="match_parent"
@@ -113,7 +108,12 @@
             android:layout_height="wrap_content"
             leon:leftIcon="@drawable/setting"
             leon:leftText="设置" />
-
+        <com.leon.lib.settingview.LSettingItem
+            android:id="@+id/back_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            leon:leftIcon="@drawable/daifu"
+            leon:leftText="退出" />
         <!--    <com.leon.lib.settingview.LSettingItem-->
         <!--        android:id="@+id/item_six"-->
         <!--        android:layout_width="match_parent"-->

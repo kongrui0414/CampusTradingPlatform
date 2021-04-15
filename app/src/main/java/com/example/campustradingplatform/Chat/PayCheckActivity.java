@@ -2,6 +2,7 @@ package com.example.campustradingplatform.Chat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -84,6 +85,7 @@ public class PayCheckActivity extends AppCompatActivity {
                         Toast.makeText(PayCheckActivity.this,"请先选择未来日期",Toast.LENGTH_SHORT).show();
                         return ;
                     }
+//                    Log.d("TAG", "onClick: "+chatItem);
                     chatItem.setTransDate(dateStrText.getText().toString());
                     comfirmThread = LocaService.comfirmOrder(chatItem);
                     while(!comfirmThread.isFinished());

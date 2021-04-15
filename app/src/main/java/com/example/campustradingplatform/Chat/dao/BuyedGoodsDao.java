@@ -1,5 +1,7 @@
 package com.example.campustradingplatform.Chat.dao;
 
+import android.util.Log;
+
 import com.example.campustradingplatform.Goods.Goods;
 import com.example.campustradingplatform.UtilTools.TimeUtil;
 
@@ -44,7 +46,7 @@ public class BuyedGoodsDao {
     }
 
     public static int insertGoods(Goods goods, Connection conn) {
-
+        
         int sellerid = goods.getSellerId();
         int goodsId = goods.getGoodsId();
         String goodsName =goods.getGoodsName();
@@ -56,7 +58,7 @@ public class BuyedGoodsDao {
 
 
         String sql = "insert into buyed_goods value(null,"+sellerid+",'"+goodsName+"','"+description+"',"+
-                originalPrice+","+presentPrice+",'"+oldorNew+"','"+launchTime+"')";
+                originalPrice+","+presentPrice+",'"+oldorNew+"','"+TimeUtil.dateToString(launchTime)+"')";
         return BaseDao.insert(sql,conn);
     }
 

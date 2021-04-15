@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -97,7 +98,10 @@ public class GoodsDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //创建会话跳转
-                if(chatItem.getGoods().getSellerId() == chatItem.getUser().getId()) return;
+                if(chatItem.getGoods().getSellerId() == chatItem.getUser().getId()){
+                    Toast.makeText(GoodsDetail.this, "本人发售的商品，不能建立会话", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
 //                Log.d("TAG", "onClick: ");
                 MainChatServiceThread thread =  ChatService.addChatItemByBidAndSidAndGid(chatItem);

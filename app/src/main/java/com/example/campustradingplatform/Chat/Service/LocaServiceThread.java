@@ -119,7 +119,8 @@ public class LocaServiceThread extends Thread{
         //先查询订单的商品id
         String gid = MainChatDao.getChatGIDByChatID(chatItem.getChatID(),conn);
 
-        chatItem.getGoods().setGoodsId(Integer.valueOf(gid));
+        if(!"-1".equals(gid) && !"".equals(gid) && null != gid)
+            chatItem.getGoods().setGoodsId(Integer.valueOf(gid));
 
         //加入订单,但是需要等待卖家同意
         OrderDao.insertOrder(chatItem,conn);

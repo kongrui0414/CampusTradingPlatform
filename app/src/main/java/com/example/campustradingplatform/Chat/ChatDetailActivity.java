@@ -381,6 +381,10 @@ public class ChatDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                Log.d("TAG", "onClick: 确认购买buyBtn");
                 //跳转结算界面
+                if(chatItem.getGoods().getSellerId() == chatItem.getUser().getId()){
+                    Toast.makeText(ChatDetailActivity.this, "此为本人出售的商品",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 if(chatItem.getIsSelled().equals("1")) {
                     Toast.makeText(ChatDetailActivity.this,"该商品正在交易或已完成交易",Toast.LENGTH_SHORT).show();
                     return ;
@@ -453,6 +457,11 @@ public class ChatDetailActivity extends AppCompatActivity {
 
 
         buyBtn = (Button)findViewById(R.id.comfirm_buy_btn);
+        if(chatItem.getGoods().getSellerId() == chatItem.getUser().getId()){
+            buyBtn.setText("本人出售");
+            Drawable drawable = getResources().getDrawable(R.color.yellow_bright);
+            buyBtn.setBackground(drawable);
+        }
         if(chatItem.getIsSelled().equals("1")){
             buyBtn.setText("已出售");
             Drawable drawable = getResources().getDrawable(R.color.yellow_bright);

@@ -165,7 +165,7 @@ public class HomeFragment extends Fragment {
 ////        for (int i=0;i<10;i++){
 ////            gridlist.add("商品"+i);
 ////        }
-        GoodsThread thread = GoodsService.getGoodsList();
+        GoodsThread thread = GoodsService.getGoodsList(user);
         while(!thread.isFinished());
         final List<Goods> gridlist = thread.getGoodsList();
 

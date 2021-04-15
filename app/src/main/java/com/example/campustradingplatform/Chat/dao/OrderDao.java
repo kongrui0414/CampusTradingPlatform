@@ -36,8 +36,8 @@ public class OrderDao {
         String sql = "alter table order_tb auto_increment = 1";
         BaseDao.alert(sql,conn);
 
-        sql  = "insert into order_tb value(null,"+chatItem.getBuyer().getId()+
-                ","+chatItem.getSeller().getId()+","+chatItem.getGoods().getGoodsId()
+        sql  = "insert into order_tb value(null,"+chatItem.getSeller().getId()+
+                ","+chatItem.getBuyer().getId()+","+chatItem.getGoods().getGoodsId()
                 +",now(),'"+chatItem.getTranAddr()+"','"+chatItem.getTransDate()+"',0,"+chatItem.getChatID()+")";
 
 
@@ -92,6 +92,7 @@ public class OrderDao {
                 //再查人
                 User buyer = UserDao.getUserByUID(Integer.valueOf(rs.getString("buyerid")),conn);
                 buyer.setIsBuyer(true);
+
 
                 //再查商品
                 Goods goods = GoodsDao.seletGoodsByGid(rs.getString("gid"),conn);
