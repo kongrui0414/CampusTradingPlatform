@@ -59,6 +59,7 @@ public class BuyedGoodsDao {
 
         String sql = "insert into buyed_goods value(null,"+sellerid+",'"+goodsName+"','"+description+"',"+
                 originalPrice+","+presentPrice+",'"+oldorNew+"','"+TimeUtil.dateToString(launchTime)+"')";
+        Log.d(TAG, "insertGoods: "+sql);
         return BaseDao.insert(sql,conn);
     }
 

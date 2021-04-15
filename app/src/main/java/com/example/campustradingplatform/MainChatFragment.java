@@ -60,14 +60,16 @@ public class MainChatFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_chat_fragment, container, false);
         this.view = view;
+
+        //获取 intent传来的参数
         Activity activity = getActivity();
         if(activity instanceof MainActivity)
             user = ((MainActivity)activity).getUser();
 
 //        Log.d(TAG, "onCreateView: "+user);
 //        initTestBtn();
-        initChatListData();
-        initUI();
+        initChatListData();  //初始化数据
+        initUI();           //初始化界面
         return view;
     }
     /**

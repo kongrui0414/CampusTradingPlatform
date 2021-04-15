@@ -1,5 +1,7 @@
 package com.example.campustradingplatform.Chat.dao;
 
+import android.util.Log;
+
 import com.example.campustradingplatform.Chat.ChatBean.ChatItem;
 import com.example.campustradingplatform.Chat.ChatBean.OrderItem;
 import com.example.campustradingplatform.Goods.Goods;
@@ -170,7 +172,7 @@ public class OrderDao {
             ResultSet rs  = BaseDao.select(sql,conn);
             while(rs.next()){
                 User seller = UserDao.getUserByUID(Integer.valueOf(rs.getString("sellerid")),conn);
-                Goods goods = GoodsDao.seletGoodsByGid(rs.getString("gid"),conn);
+                Goods goods = BuyedGoodsDao.seletGoodsByGid(rs.getString("gid"),conn);
 
                 OrderItem orderItem = new OrderItem(rs.getString("orderid"),user,user,seller,
                         goods, opState,rs.getString("selled_state"),rs.getString("chatid"));
@@ -199,7 +201,7 @@ public class OrderDao {
             ResultSet rs  = BaseDao.select(sql,conn);
             while(rs.next()){
                 User buyer = UserDao.getUserByUID(Integer.valueOf(rs.getString("buyerid")),conn);
-                Goods goods = GoodsDao.seletGoodsByGid(rs.getString("gid"),conn);
+                Goods goods = BuyedGoodsDao.seletGoodsByGid(rs.getString("gid"),conn);
 
                 OrderItem orderItem = new OrderItem(rs.getString("orderid"),user,buyer,user,
                         goods, opState,rs.getString("selled_state"),rs.getString("chatid"));
@@ -260,10 +262,11 @@ public class OrderDao {
             ResultSet rs  = BaseDao.select(sql,conn);
             while(rs.next()){
                 User seller = UserDao.getUserByUID(Integer.valueOf(rs.getString("sellerid")),conn);
-                Goods goods = GoodsDao.seletGoodsByGid(rs.getString("gid"),conn);
+                Goods goods = BuyedGoodsDao.seletGoodsByGid(rs.getString("gid"),conn);
                 OrderItem orderItem = new OrderItem(rs.getString("orderid"),user,user,seller,
                         goods, opState,rs.getString("selled_state"),rs.getString("chatid"));
                 orderItems.add(orderItem);
+                Log.d("TAG", "getOrderByBidAndStateInBuyedGoods: "+orderItem);
             }
 
             return orderItems;
@@ -320,7 +323,7 @@ public class OrderDao {
             ResultSet rs  = BaseDao.select(sql,conn);
             while(rs.next()){
                 User buyer = UserDao.getUserByUID(Integer.valueOf(rs.getString("buyerid")),conn);
-                Goods goods = GoodsDao.seletGoodsByGid(rs.getString("gid"),conn);
+                Goods goods = BuyedGoodsDao.seletGoodsByGid(rs.getString("gid"),conn);
                 OrderItem orderItem = new OrderItem(rs.getString("orderid"),user,buyer,user,
                         goods, opState,rs.getString("selled_state"),rs.getString("chatid"));
                 orderItems.add(orderItem);

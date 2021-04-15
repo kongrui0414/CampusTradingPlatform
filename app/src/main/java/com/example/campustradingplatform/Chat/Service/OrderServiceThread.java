@@ -276,11 +276,9 @@ public class OrderServiceThread extends Thread{
     private void sellerAgreeOrder(OrderItem orderItem, Connection conn) {
         //将goods 加入到 buyed—goods表内
         int id = BuyedGoodsDao.insertGoods(orderItem.getGoods(),conn);
+
 //        Log.d(TAG, "插入结果的id：" + id+"sellerAgreeOrder: "+orderItem.getGoods());
-
         GoodsDao.deleGoods(orderItem.getGoods(),conn);
-
-
         MainChatDao.updateChatGoodsSellStateByGidAndBuyedGid(orderItem.getGoods(),id,1,conn);
 
         OrderDao.updateOrderStateAndGIDByOrderItemAndState(orderItem,id,GlobalVars.SELLER_AGREE_DB,conn);
@@ -292,11 +290,6 @@ public class OrderServiceThread extends Thread{
     }
 
     private void recievedGoodsOrder(OrderItem orderItem, Connection conn) {
-        int id = BuyedGoodsDao.insertGoods(orderItem.getGoods(),conn);
-//        Log.d(TAG, "插入结果的id：" + id+"sellerAgreeOrder: "+orderItem.getGoods());
-
-        GoodsDao.deleGoods(orderItem.getGoods(),conn);
-        MainChatDao.updateChatGoodsSellStateByGidAndBuyedGid(orderItem.getGoods(),id,1,conn);
         OrderDao.updateOrderStateByOrderItemAndState(orderItem,GlobalVars.BUYER_RECIEVED_DB,conn);
     }
 

@@ -3,7 +3,6 @@ package com.example.campustradingplatform.Deatil;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,8 +15,6 @@ import com.example.campustradingplatform.Chat.ChatDetailActivity;
 import com.example.campustradingplatform.Chat.Service.ChatService;
 import com.example.campustradingplatform.Chat.Service.MainChatServiceThread;
 import com.example.campustradingplatform.Goods.Goods;
-import com.example.campustradingplatform.Goods.GoodsService;
-import com.example.campustradingplatform.Goods.GoodsThread;
 import com.example.campustradingplatform.R;
 
 public class GoodsDetail extends AppCompatActivity {
@@ -117,11 +114,11 @@ public class GoodsDetail extends AppCompatActivity {
 
     }
 
-    private void getGoodsPrice(){
-        GoodsThread thread= GoodsService.getGoodsOldPrice(chatItem.getGoods());
-        while(!thread.isFinished());
-        Log.d("tag","oldprice:"+oldprice);
-    }
+//    private void getGoodsPrice(){
+//        GoodsThread thread= GoodsService.getGoodsOldPrice(chatItem.getGoods());
+//        while(!thread.isFinished());
+//        Log.d("tag","oldprice:"+oldprice);
+//    }
 
 
 }
