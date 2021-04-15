@@ -167,9 +167,9 @@ public class OrderServiceThread extends Thread{
         states.add(GlobalVars.SELLER_DISAGREE_DB);
         states.add(GlobalVars.SELLER_AGREE_REFUND_DB);
         states.add(GlobalVars.SELLER_CANCEL_ORDER_DB);
-        orderItems = OrderDao.getOrderBySidAndStatesInGoods(user,states,GlobalVars.SELLER_FINISHED_ORDER,conn);
+        orderItems = OrderDao.getOrderBySidAndStatesInBuyedGoods(user,states,GlobalVars.SELLER_FINISHED_ORDER,conn);
 
-        List<OrderItem> orderItems2 = OrderDao.getOrderBySidAndStateInGoods(user,GlobalVars.BUYER_RECIEVED_DB,GlobalVars.SELLER_FINISHED_ORDER,conn);
+        List<OrderItem> orderItems2 = OrderDao.getOrderBySidAndStateInBuyedGoods(user,GlobalVars.BUYER_RECIEVED_DB,GlobalVars.SELLER_FINISHED_ORDER,conn);
         orderItems.addAll(orderItems2);
     }
 
@@ -179,9 +179,9 @@ public class OrderServiceThread extends Thread{
         states.add(GlobalVars.SELLER_DISAGREE_DB);
         states.add(GlobalVars.SELLER_AGREE_REFUND_DB);
         states.add(GlobalVars.SELLER_CANCEL_ORDER_DB);
-        orderItems = OrderDao.getOrderByBidAndStatesInGoods(user,states,GlobalVars.FINISHED_ORDER,conn);
+        orderItems = OrderDao.getOrderByBidAndStatesInBuyedGoods(user,states,GlobalVars.FINISHED_ORDER,conn);
 
-        List<OrderItem> orderItems2 = OrderDao.getOrderByBidAndStateInGoods(user,GlobalVars.BUYER_RECIEVED_DB,GlobalVars.FINISHED_ORDER,conn);
+        List<OrderItem> orderItems2 = OrderDao.getOrderByBidAndStateInBuyedGoods(user,GlobalVars.BUYER_RECIEVED_DB,GlobalVars.FINISHED_ORDER,conn);
         orderItems.addAll(orderItems2);
     }
 
@@ -191,7 +191,7 @@ public class OrderServiceThread extends Thread{
         states.add(GlobalVars.BUYER_REQ_REFUND_DB);
         states.add(GlobalVars.SELLER_AGREE_REFUND_DB);
 
-        orderItems = OrderDao.getOrderBySidAndStatesInGoods(user,states,GlobalVars.SELLER_WAIT_REFUND_ORDER,conn);
+        orderItems = OrderDao.getOrderBySidAndStatesInBuyedGoods(user,states,GlobalVars.SELLER_WAIT_REFUND_ORDER,conn);
 
         List<OrderItem> orderItems2 = OrderDao.getOrderBySidAndStateInBuyedGoods(user,GlobalVars.SELLER_DISAGREE_REFUND_DB,GlobalVars.SELLER_WAIT_REFUND_ORDER,conn);
         orderItems.addAll(orderItems2);
@@ -202,7 +202,7 @@ public class OrderServiceThread extends Thread{
         List<String> states = new ArrayList<>();
         states.add(GlobalVars.BUYER_REQ_REFUND_DB);
         states.add(GlobalVars.SELLER_AGREE_REFUND_DB);
-        orderItems = OrderDao.getOrderByBidAndStatesInGoods(user,states,GlobalVars.WAIT_REFUND_ORDER,conn);
+        orderItems = OrderDao.getOrderByBidAndStatesInBuyedGoods(user,states,GlobalVars.WAIT_REFUND_ORDER,conn);
 
         List<OrderItem> orderItems2 = OrderDao.getOrderByBidAndStateInBuyedGoods(user,GlobalVars.SELLER_DISAGREE_REFUND_DB,GlobalVars.WAIT_REFUND_ORDER,conn);
         orderItems.addAll(orderItems2);
